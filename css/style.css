@@ -45,6 +45,7 @@ body {
   border-bottom: 1em solid #fff;
 }
 
+/* bumped slightly to avoid accidental edge reveal accross browsers [investigate potential sources of error including vh units and %]  */
 #panorama > .fade {
   height: 11%;
 }
@@ -71,8 +72,7 @@ body {
   border: 0;
   color: #fff;
   background-color: auto;
-  text-shadow: -1.5px -1.5px 0 #060053, 1.5px -1.5px 0 #060053,
-    -1.5px 1.5px 0 #060053, 1.5px 1.5px 0 #060053;
+  white-space: nowrap;
 }
 
 #title {
@@ -81,13 +81,27 @@ body {
   font-size: 4rem;
   font-weight: bold;
   z-index: 1;
+  text-shadow: -1.5px -1.5px 0 #060053, 1.5px -1.5px 0 #060053,
+    -1.5px 1.5px 0 #060053, 1.5px 1.5px 0 #060053;
+  /* color: #b7ebff; */
 }
+
+/* #title::before {
+  content: "Roslyn Health";
+  color: #fff;
+  position: absolute;
+  left: 0;
+  height: 55%;
+  overflow: hidden;
+} */
 
 #about,
 #contact {
   left: 50%;
   top: 12.5%;
   font-size: 2.5rem;
+  text-shadow: -1px -1px 0 #060053, 1px -1px 0 #060053, -1px 1px 0 #060053,
+    1px 1px 0 #060053;
 }
 
 nav {
@@ -97,6 +111,7 @@ nav {
   transform: translate(-50%);
   white-space: nowrap;
   overflow: hidden;
+  z-index: 0;
 }
 
 .mini-button {
@@ -117,11 +132,6 @@ nav {
   font-size: 1.8rem;
 }
 
-.mini-button:hover {
-  background-color: rgb(214, 214, 214); /* rgba(255, 125, 125, 0.7) */
-  color: rgb(11, 0, 158);
-}
-
 .mini-button img {
   position: absolute;
   right: 3.5%;
@@ -137,10 +147,6 @@ nav {
   transition: padding 0.2s ease-in-out;
 }
 
-.dropdown:hover {
-  padding: 0.5rem 0.5rem 2rem 0.5rem;
-}
-
 .droptext {
   display: block;
   font-size: 1.1rem;
@@ -149,16 +155,13 @@ nav {
   border: 0;
 }
 
-/* reveal text fade ins */
+/* text fade ins */
 .dropdown .droptext,
 #drophours table {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
-.dropdown:hover .droptext,
-#drophours:hover table {
-  opacity: 1;
-}
+
 /* [class added by time.js] */
 .see-week {
   display: inline-block;
@@ -167,20 +170,77 @@ nav {
   top: 0.8rem;
 }
 
+/* use CSS hover if supported */
+@media not all and (hover: none) {
+  .mini-button:hover,
+  .hover {
+    background-color: rgb(214, 214, 214);
+    color: rgb(11, 0, 158);
+  }
+
+  #drophours:hover {
+    padding: 0.5rem 0.5rem 7.7rem 0.5rem;
+  }
+
+  .dropdown:hover {
+    padding: 0.5rem 0.5rem 2rem 0.5rem;
+  }
+
+  .dropdown:hover .droptext,
+  #drophours:hover #timetable {
+    opacity: 1;
+  }
+}
+
+/* EXPERIMENTS (what about @supports condition?) */
+.mini-button:focus {
+  background-color: rgb(214, 214, 214);
+  color: rgb(11, 0, 158);
+}
+
+#drophours:focus {
+  padding: 0.5rem 0.5rem 7.7rem 0.5rem;
+}
+
+.dropdown:focus {
+  padding: 0.5rem 0.5rem 2rem 0.5rem;
+}
+
+.dropdown:focus .droptext,
+#drophours:focus #timetable {
+  opacity: 1;
+}
+
+/* replacement hover classes to add/remove with main.js */
+/* .hover-buttons {
+  background-color: rgb(214, 214, 214);
+  color: rgb(11, 0, 158);
+}
+.hover-padding {
+  padding: 0.5rem 0.5rem 2rem 0.5rem;
+}
+.hover-hours {
+  padding: 0.5rem 0.5rem 7.7rem 0.5rem;
+}
+.hover-fade {
+  opacity: 1;
+} */
+
+/* .show-hours, */
 #drophours {
   transition: padding 0.2s ease-in-out;
   text-align: justify;
 }
 
-#drophours:hover {
-  padding: 0.5rem 0.5rem 7.7rem 0.5rem;
-}
-
-#drophours table {
+#timetable {
   font-size: 0.9rem;
   margin: 0.2rem 0 0 0.2rem;
   padding: 0;
   border: 0;
+}
+/* [svg added by time.js] */
+#week-arrow {
+  transition: transform 0.2s ease-in-out;
 }
 
 /* emergency msg */
@@ -203,7 +263,7 @@ nav {
   border-radius: 0.3rem;
   padding: 0.3rem;
   font-weight: 300;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 #emergency-big .center {
@@ -236,7 +296,7 @@ img.pageDown {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: minmax(100px, auto);
-  grid-auto-columns: minmax(100px, auto);
+  grid-auto-columns: minmax(200px, auto);
   grid-gap: 1em;
   justify-items: stretch; /* inner horizontal alignment */
   align-items: stretch; /* inner vertical alignment */
@@ -248,49 +308,64 @@ img.pageDown {
   padding: 1em;
 }
 
-/* .box {
-  transition: background-color 0.2s ease-in-out;
-}
-.box:hover {
-  background-color: rgb(214, 214, 214);
-} */
-
-.intro-msg {
-  grid-column: 2/5;
+.symbol {
   grid-row: 1;
 }
 
-/* Doctors Profiles */
-.brent {
-  grid-column: 1/6;
+.intro-msg {
+  grid-column: 2/5;
   grid-row: 2;
+}
+
+/* Doctors Profiles */
+.doctor {
+  grid-column: 1/-1;
   background: linear-gradient(to right, #56c9f8, transparent);
 }
-.marge {
-  grid-column: 1/6;
-  grid-row: 3;
+.doctor:nth-child(odd) {
   background: linear-gradient(to left, #56f8d0, transparent);
   justify-items: end;
+}
+
+.brent {
+  grid-row: 3;
+}
+.marge {
+  grid-row: 4;
+}
+.rachel {
+  grid-row: 5;
+}
+.graham {
+  grid-row: 6;
+}
+.eliza {
+  grid-row: 7;
 }
 
 /* dunedin panorama */
 #panorama {
   position: relative;
   height: 49vh; /* margin-bottom: 2rem; */
-  margin-top: 2rem;
-  background: url("img/dunedin2.jpg") center center no-repeat;
+  margin: 0 0 2rem 0;
+  background: url("../img/dunedin2.jpg") center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
   opacity: 0.88;
 }
 /* footer */
-#main-footer {
-  padding: 2em;
+footer {
+  padding: 0.5em 2em;
   background: #000;
   color: #fff;
   text-align: center;
 }
-#main-footer a {
+footer p {
+  margin: 0;
+  padding: 0;
+}
+
+footer a {
   color: #56c9f8;
   /* #2690d4; */
   text-decoration: none;
@@ -305,11 +380,11 @@ img.pageDown {
 /* SPLIT SCREEN TRANSFORMS */
 /* landing page images */
 #left-img {
-  background: url("img/dunedin.jpg") center center no-repeat;
+  background: url("../img/dunedin.jpg") center center no-repeat;
   background-size: cover;
 }
 #right-img {
-  background: url("img/molecules.jpg") center center no-repeat;
+  background: url("../img/molecules.jpg") center center no-repeat;
   background-size: cover;
 }
 /* general split-screen hover transforms */
@@ -362,6 +437,12 @@ img.pageDown {
 @media only screen and (max-width: 800px) {
   .big-grid {
     grid-template-columns: 1fr 1fr;
+  }
+  .intro-msg {
+    grid-column: 1/-1;
+  }
+  .empty {
+    display: none;
   }
   .split a {
     font-size: 1.6rem !important;
@@ -435,30 +516,60 @@ img.pageDown {
   }
 }
 /* HORRIBLE landscape PHONE constraints */
-/* @media only screen and (max-height: 625px) and (orientation: landscape) {
+@media only screen and (max-height: 625px) {
   #contact,
   #about,
-  .fade,
-  #pageDown,
-  #emergency-big
- {
+  img.pageDown {
     display: none;
   }
   #title {
-    font-size: 4.5rem !important;
-    top: 1% !important;
+    font-size: 2rem !important;
   }
-  .split nav {
-    margin-top: -2rem !important;
+  .split a {
+    font-size: 1.1rem !important;
+  }
+  .droptext {
+    font-size: 0.8rem !important;
+  }
+  .mini-button {
+    max-height: 1.1rem;
+    width: 7.5rem !important;
+  }
+  .mini-button img {
+    max-height: 1.1rem;
+    right: 1% !important;
+  }
+  .see-week {
+    right: 20%;
   }
 }
-@media only screen and (max-height: 380px) and (orientation: landscape) {
+@media only screen and (max-height: 400px) {
+  .container {
+    height: 120%;
+  }
+}
+@media only screen and (max-height: 330px) {
+  .container {
+    height: 170%;
+  }
+}
+
+/* @media only screen and (max-height: 380px) {
   #title {
     font-size: 2rem !important;
-    text-shadow: 0.15rem 0.15rem 0 rgb(75, 75, 75) !important;
   }
-  .split nav {
-    margin-top: -3rem !important;
-    z-index: 2 !important;
+  .split a {
+    font-size: 1.1rem !important;
+  }
+  .droptext {
+    font-size: 0.8rem !important;
+  }
+  .mini-button {
+    max-height: 1.1rem;
+    width: 7.5rem !important;
+  }
+  .mini-button img {
+    max-height: 1.1rem;
+    right: 1% !important;
   }
 } */
