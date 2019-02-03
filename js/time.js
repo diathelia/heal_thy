@@ -121,10 +121,10 @@ function threeDays() {
 function applyHTML() {
   let status;
   // if open is still true, then openDay is still today, therefore can simply check todays hour
-  if (open === true && hour >= 18) {
-    status = "closed";
-  } else {
+  if (open === true && hour <= 18) {
     status = "open";
+  } else {
+    status = "closed";
   }
 
   // assign open / closed to DOM
