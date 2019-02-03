@@ -1,3 +1,5 @@
+// moight have to give up and use date.js instead
+
 /* getDay returns an int from 0-6   : Sunday    0
                                       Monday    1  0
                                       Tuesday   2  1
@@ -5,8 +7,14 @@
                                       Thursday  4  3
                                       Friday    5  4
                                       Saturday  6  5
-                                      
+
 getHours returns an int of the hour in 24 hour time, no hour = 0 */
+
+/*/
+ *  construct a seperate date object to manipulate into a viable day
+ *  for each check, re-set the date object (ordering still important)
+/*/
+
 const dateObj = new Date(),
   year = dateObj.getFullYear(),
   month = dateObj.getMonth(),
@@ -14,126 +22,140 @@ const dateObj = new Date(),
   day = dateObj.getDay(),
   hour = dateObj.getHours(),
   ids = ["#monday", "#tuesday", "#wednesday", "#thursday", "#friday"],
-  timeInfo = {},
-  holidays = {},
-  today = [month + 1, date],
-  tomorrow = [month + 1, date + 1],
-  dayAfter = [month + 1, date + 2];
+  today = [month + 1, date];
 
-// flag for permeable holidays
-let isHoliday = false;
+let open = true,
+  holidays = {},
+  // used to track which day to highlight as open
+  openDay = new Date();
 
 // populate holidays in format [M(M), D(D)] to match the today variable
 // (these are invariant to year)
 holidays.nyd = [1, 1];
 holidays.nyde = [1, 2];
-holidays.waitangi = [6, 2];
+// is mondayised
+holidays.waitangi = [6, 3]; // bumped to monday
+// is mondayised
 holidays.anzac = [4, 25];
 holidays.christmas = [12, 25];
 holidays.boxing = [12, 26];
-// holidays.test1     = [9, 2];
-// holidays.test2     = [9, 3];
-// holidays.test3     = [9, 4];
+
+// holidays.test = [2, 4];
 
 // (these change per year)
-// [easter days]
-// [queens bday]
-// [labour day]
-// [otago anniversary day]
+holidays.easterf = [4, 19];
+holidays.easterm = [4, 22];
+holidays.queens = [6, 3];
+holidays.labour = [10, 28];
+// is mondayised
+holidays.otago = [3, 25];
 
-// console.log(today, tomorrow, dayAfter);
+// modifies openDay date object, returns true/false
+function isWeekend() {
+  if (openDay.getDay() === 0) {
+    // set to monday
 
-function checkHolidays() {
-  // detect special closed day
-  for (var key in holidays) {
-    if (holidays[key].toString() == today.toString()) {
-      document.querySelector(ids[day]).style.fontWeight = "bold";
-      isHoliday = true;
-      console.log(1);
-
-      if (holidays[key].toString() == tomorrow.toString()) {
-        document.querySelector(ids[day]).style.fontWeight = "normal";
-        document.querySelector(ids[day + 1]).style.fontWeight = "bold";
-        isHoliday = true;
-        console.log(2);
-
-        if (holidays[key].toString() == dayAfter.toString()) {
-          document.querySelector(ids[day + 1]).style.fontWeight = "normal";
-          document.querySelector(ids[day + 2]).style.fontWeight = "bold";
-          isHoliday = true;
-          console.log(3);
-        }
-      }
-    } else {
-      console.log("not a holiday");
-    }
-  }
-
-  if (isHoliday === false) {
-    getTimeInfo();
+    openDay.setDate(openDay.getDate() + 1);
+    // set to 'closed'
+    open = false;
+    return true;
+  } else if (openDay.getDay() === 6) {
+    // set to monday
+    openDay.setDate(openDay.getDate() + 2);
+    // set to 'closed'
+    open = false;
+    return true;
   } else {
-    // wtf
-    applyHTML();
+    return false;
   }
 }
 
-// set time-related HTML
-function getTimeInfo() {
-  // detect if its the weekend
-  if (day === 0 || day === 6) {
-    timeInfo.special = "weekend";
-
-    // therefore monday should be emphasised
-    document.querySelector("#monday").style.fontWeight = "bold";
+// modifies openDay date object
+function isEvening() {
+  // detect if closed for today but open the following morning
+  if (hour >= 18) {
+    if (day === 5) {
+      // set to monday
+      openDay.setDate(openDay.getDate() + 3);
+    }
+    // set to following day
+    openDay.setDate(openDay.getDate() + 1);
+    // set to 'closed'
+    open = false;
   }
+}
 
-  // detect if its closed for today but open the following morning
-  else if (
-    hour >= 18 &&
-    !(day === 5 || day === 6) &&
-    timeInfo.special !== "weekend"
-  ) {
-    timeInfo.special = "evening";
-
-    // therefore day + 1 should be emphasised
-    document.querySelector(ids[day]).style.fontWeight = "bold";
+// modifies openDay date object, returns true/false
+function isHoliday() {
+  // get comparable array from proposed date object
+  let test = [openDay.getMonth() + 1, openDay.getDate()];
+  // loop through holidays properties by key
+  for (var key in holidays) {
+    // if proposed day matches a holiday (short circuited by checking month first)
+    if (holidays[key].toString() === test.toString()) {
+      // proposed day + 1 is safe
+      openDay.setDate(openDay.getDate() + 1);
+      return true;
+    }
   }
+  return false;
+}
 
-  // detect if earlier than 8am on a weekday
-  else if (hour < 8 && timeInfo.special !== "weekend") {
-    timeInfo.special = "morning";
-
-    // therefore day should be emphasised
-    document.querySelector(ids[day - 1]).style.fontWeight = "bold";
+// tests if today, tomorrow, and day after are holidays
+function threeDays() {
+  // test proposed date object for holiday
+  if (isHoliday() === true) {
+    console.log("openDay is a holiday, testing day after");
+    // set to 'closed'
+    open = false;
+    if (isHoliday() === true) {
+      console.log("still a holiday, testing day after");
+      if (isHoliday() === true) {
+        console.log("still a holiday, last try then giving up");
+        isHoliday();
+      }
+    }
   }
-  applyHTML();
 }
 
 function applyHTML() {
-  // correct html to inject
-  let answer;
-
-  // if a special case was handled, button should say closed
-  if (timeInfo.special) {
-    console.log("timeInfo.special = ", timeInfo.special);
-    answer =
-      '<span style="color: red">closed</span><span class="see-week">hours</span>' +
-      '<img src="img/baseline-keyboard_arrow_down-24px.svg" id="week-arrow" alt="see weekly hours">';
+  let status;
+  // if open is still true, then openDay is still today, therefore can simply check todays hour
+  if (open === true && hour >= 18) {
+    status = "closed";
   } else {
-    console.log("no special case detected, must be open!");
-
-    // no special case --> button should say open
-    answer =
-      '<span style="color: red">open</span><span class="see-week">hours</span>' +
-      '<img src="img/baseline-keyboard_arrow_down-24px.svg" id="week-arrow" alt="see weekly hours">';
-
-    // emphasise whatever the current day is
-    document.querySelector(ids[day - 1]).style.fontWeight = "bold";
+    status = "open";
   }
 
-  // assign correct html to DOM
-  document.querySelector("#hours").innerHTML = answer;
+  // assign open / closed to DOM
+  document.querySelector(
+    "#hours"
+  ).innerHTML = `<span style="color: red">${status}</span>
+                 <span class="see-week">hours</span>
+                 <img src="img/baseline-keyboard_arrow_down-24px.svg" id="week-arrow" alt="see weekly hours">
+                `;
 }
 
-// set up time
-checkHolidays();
+/*/ begin ordered execution *********************************/
+
+// uses todays date to test, modifies openDay
+isEvening();
+
+// test bump
+// openDay.setDate(openDay.getDate() + 1);
+
+// uses openDay to test, modifies openDay
+threeDays();
+
+// test proposed non-holiday openDay
+if (isWeekend() === true) {
+  console.log("openDay pushed into weekend");
+  // test monday tuesday wednesday for holidays
+  threeDays();
+}
+
+// now safe to use openDay
+document.querySelector(ids[openDay.getDay() - 1]).style.fontWeight = "bold";
+
+// uses open/closed flag and renders the fixed week
+applyHTML();

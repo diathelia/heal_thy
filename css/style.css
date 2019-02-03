@@ -162,6 +162,19 @@ nav {
   transition: opacity 0.5s ease-in-out;
 }
 
+/* hours */
+#drophours {
+  transition: padding 0.2s ease-in-out;
+  text-align: justify;
+}
+
+#timetable {
+  font-size: 0.9rem;
+  margin: 0.2rem 0 0 0.2rem;
+  padding: 0;
+  border: 0;
+}
+
 /* [class added by time.js] */
 .see-week {
   display: inline-block;
@@ -170,44 +183,28 @@ nav {
   top: 0.8rem;
 }
 
-/* use CSS hover if supported */
-@media not all and (hover: none) {
-  .mini-button:hover,
-  .hover {
-    background-color: rgb(214, 214, 214);
-    color: rgb(11, 0, 158);
-  }
+/* CONVERT HOVER TO .HOVER: A CLASS FOR MERGING DESKTOP HOVER/TOUCH EFFECTS WITH TOUCHSCREENS */
 
-  #drophours:hover {
-    padding: 0.5rem 0.5rem 7.7rem 0.5rem;
-  }
-
-  .dropdown:hover {
-    padding: 0.5rem 0.5rem 2rem 0.5rem;
-  }
-
-  .dropdown:hover .droptext,
-  #drophours:hover #timetable {
-    opacity: 1;
-  }
-}
-
-/* EXPERIMENTS (what about @supports condition?) */
-.mini-button:focus {
+.mini-button.hover,
+.mini-button:hover {
   background-color: rgb(214, 214, 214);
   color: rgb(11, 0, 158);
 }
 
-#drophours:focus {
+#drophours.hover,
+#drophours:hover {
   padding: 0.5rem 0.5rem 7.7rem 0.5rem;
 }
 
-.dropdown:focus {
+.dropdown.hover,
+.dropdown:hover {
   padding: 0.5rem 0.5rem 2rem 0.5rem;
 }
 
-.dropdown:focus .droptext,
-#drophours:focus #timetable {
+.dropdown:hover .droptext,
+.dropdown.hover .droptext,
+#drophours:hover #timetable,
+#drophours.hover #timetable {
   opacity: 1;
 }
 
@@ -226,18 +223,6 @@ nav {
   opacity: 1;
 } */
 
-/* .show-hours, */
-#drophours {
-  transition: padding 0.2s ease-in-out;
-  text-align: justify;
-}
-
-#timetable {
-  font-size: 0.9rem;
-  margin: 0.2rem 0 0 0.2rem;
-  padding: 0;
-  border: 0;
-}
 /* [svg added by time.js] */
 #week-arrow {
   transition: transform 0.2s ease-in-out;
