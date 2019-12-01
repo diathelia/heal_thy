@@ -21,13 +21,18 @@ const dateObj = new Date(),
   date = dateObj.getDate(),
   day = dateObj.getDay(),
   hour = dateObj.getHours(),
+  min = dateObj.getMinutes(),
   ids = ["#monday", "#tuesday", "#wednesday", "#thursday", "#friday"],
   today = [month + 1, date];
 
 let open = true,
   holidays = {},
   // used to track which day to highlight as open
-  openDay = new Date();
+  openDay = new Date(),
+  // status text ('open' or 'closed')
+  statusText,
+  // open text ('open' or 'next open')
+  openText;
 
 // populate holidays in format [M(M), D(D)] to match the today variable
 // (these are invariant to year)
@@ -39,8 +44,6 @@ holidays.waitangi = [6, 3]; // bumped to monday
 holidays.anzac = [4, 25];
 holidays.christmas = [12, 25];
 holidays.boxing = [12, 26];
-
-// holidays.test = [2, 4];
 
 // (these change per year)
 holidays.easterf = [4, 19];
@@ -54,7 +57,6 @@ holidays.otago = [3, 25];
 function isWeekend() {
   if (openDay.getDay() === 0) {
     // set to monday
-
     openDay.setDate(openDay.getDate() + 1);
     // set to 'closed'
     open = false;
@@ -73,7 +75,7 @@ function isWeekend() {
 // modifies openDay date object
 function isEvening() {
   // detect if closed for today but open the following morning
-  if (hour >= 18) {
+  if (hour >= 17 && min >= 30) {
     if (day === 5) {
       // set to monday
       openDay.setDate(openDay.getDate() + 3);
@@ -91,7 +93,7 @@ function isHoliday() {
   let test = [openDay.getMonth() + 1, openDay.getDate()];
   // loop through holidays properties by key
   for (var key in holidays) {
-    // if proposed day matches a holiday (short circuited by checking month first)
+    // if proposed day matches a holiday
     if (holidays[key].toString() === test.toString()) {
       // proposed day + 1 is safe
       openDay.setDate(openDay.getDate() + 1);
@@ -119,21 +121,28 @@ function threeDays() {
 }
 
 function applyHTML() {
-  let status;
-  // if open is still true, then openDay is still today, therefore can simply check todays hour
-  if (open === true && hour <= 18) {
-    status = "open";
+  // if open is still true, then openDay is still today, therefore check todays hours/mins
+  // if todays time is between 8:30am and 5:30pm set status to open
+  if (open === true && hour <= 17 && min <= 30 && hour >= 8 && min >= 30) {
+    document.querySelector("#status").style.color = "#060053"; // #56c9f8
+    statusText = "open";
+    openText = "open ⟶ ";
   } else {
-    status = "closed";
+    document.querySelector("#status").style.color = "red";
+    statusText = "closed";
+    openText = "next open ⟶ ";
   }
 
-  // assign open / closed to DOM
+  // add class to openText row
+  document.querySelector(ids[openDay.getDay() - 1]).classList.add("open-text");
+
+  // assign statusText to DOM
+  document.querySelector("#status").textContent = `${statusText}`;
+
+  // assign openText to DOM
   document.querySelector(
-    "#hours"
-  ).innerHTML = `<span style="color: red">${status}</span>
-                 <span class="see-week">hours</span>
-                 <img src="img/baseline-keyboard_arrow_down-24px.svg" id="week-arrow" alt="see weekly hours">
-                `;
+    ids[openDay.getDay() - 1]
+  ).firstElementChild.textContent = `${openText}`;
 }
 
 /*/ begin ordered execution *********************************/
@@ -141,21 +150,15 @@ function applyHTML() {
 // uses todays date to test, modifies openDay
 isEvening();
 
-// test bump
-// openDay.setDate(openDay.getDate() + 1);
-
 // uses openDay to test, modifies openDay
 threeDays();
 
 // test proposed non-holiday openDay
 if (isWeekend() === true) {
   console.log("openDay pushed into weekend");
-  // test monday tuesday wednesday for holidays
+  // test monday tuesday wednesday for holidays, modifies openDay
   threeDays();
 }
 
-// now safe to use openDay
-document.querySelector(ids[openDay.getDay() - 1]).style.fontWeight = "bold";
-
-// uses open/closed flag and renders the fixed week
+// render the fixed week
 applyHTML();

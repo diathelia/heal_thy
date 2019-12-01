@@ -1,195 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Roslyn Medical</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Roslyn Medical</title>
-</head>
+  <body>
+    <div class="splash-container">
+      <div class="nav">
+        <input type="checkbox" id="nav-check" />
+        <div class="nav-header">
+          <div class="nav-title">Roslyn Health</div>
+        </div>
+        <div class="nav-btn">
+          <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+        </div>
 
-<body>
-  <div class="container">
-    <p id="title">Roslyn Health</p>
+        <div class="nav-links">
+          <a href="#">Contact</a>
+          <a href="#">About</a>
+          <a href="https://www.managemyhealth.co.nz">Manage My Health</a>
+        </div>
+      </div>
 
-    <div class="split left" id="left-img">
-      <h1 id="contact">Contact</h1>
-      <nav>
-        <a href="#" class="mini-button" id="drophours">
-          <span id="hours"></span>
+      <div class="splash-grid">
+        <h1 id="title">Roslyn Health</h1>
+
+        <div data-aos="flip-up" class="textbox hours">
+          <span id="we-are">We are&nbsp;<span id="status"></span></span>
+          <br />
           <table id="timetable">
             <tr id="monday">
+              <td>&nbsp;</td>
               <td>Mon</td>
-              <td>8am - 6pm</td>
+              <td>8:30am - 5:30pm</td>
             </tr>
             <tr id="tuesday">
+              <td>&nbsp;</td>
               <td>Tues</td>
-              <td>8am - 6pm</td>
+              <td>8:30am - 5:30pm</td>
             </tr>
             <tr id="wednesday">
+              <td>&nbsp;</td>
               <td>Wed</td>
-              <td>8am - 6pm</td>
+              <td>8:30am - 5:30pm</td>
             </tr>
             <tr id="thursday">
-              <td>Thurs</td>
-              <td>8am - 6pm</td>
+              <td>&nbsp;</td>
+              <td>Thurs&nbsp;</td>
+              <td>8:30am - 5:30pm</td>
             </tr>
             <tr id="friday">
+              <td>&nbsp;</td>
               <td>Fri</td>
-              <td>8am - 6pm</td>
+              <td>8:30am - 5:30pm</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>Sat</td>
+              <td>Closed</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>Sun</td>
+              <td>Closed</td>
             </tr>
           </table>
-        </a>
-        <a href="#" class="mini-button dropdown">
-          <span>03-477 6471</span> <img src="img/baseline-call-24px.svg" />
-          <span class="droptext">Available 8am - 6pm</span>
-        </a>
-        <a href="#" class="mini-button dropdown" id="seeMap">
-          <span>271 Highgate</span>
-          <img src="img/baseline-add_location-24px.svg" />
-          <span class="droptext">click to see map</span>
-        </a>
-        <a href="mailto:ex@ample.com" class="mini-button dropdown">
-          <span>Email Us</span>
-          <!-- <img id="fb" src="img/fb.svg"> -->
-          <img id="email" src="img/baseline-email-24px.svg" />
-          <span class="droptext">click to get in touch</span>
-        </a>
-      </nav>
-    </div>
-
-    <div class="split right" id="right-img">
-      <h1 id="about">About Us</h1>
-      <nav>
-        <a href="#" class="mini-button dropdown yourRights">
-          <span>Your Rights</span>
-          <span class="droptext">click to see more</span>
-        </a>
-        <a href="#" class="mini-button dropdown prices">
-          <span>Prices</span> <span class="droptext">click to see more</span>
-        </a>
-        <a href="#" class="mini-button dropdown ourTeam">
-          <span>Our Team</span>
-          <span class="droptext">click to see more</span>
-        </a>
-        <a href="#" class="mini-button dropdown aboutUs">
-          <span>About Us</span>
-          <span class="droptext">click to see more</span>
-        </a>
-      </nav>
-    </div>
-
-    <img src="img/baseline-keyboard_arrow_down-24px.svg" alt="page-down arrow" class="pageDown" />
-
-    <div class="fade"></div>
-  </div>
-
-  <div id="emergency-wrap">
-    <div id="emergency-big">
-      <img src="img/baseline-local_hospital-24px.svg" />
-      <span>After Hours: open 8am - 10pm</span>
-      <p>03 479 2900 - 18 Filleul St, Dunedin</p>
-      <span class="center">in any emergency <b> <em>please</em> </b>
-      </span>
-      <br />
-      <span class="center chromePageTarget">don't hesistate to <b>call 111</b>
-      </span>
-    </div>
-  </div>
-
-  <div class="grid-wrap">
-    <div class="big-grid">
-      <div class="empty"></div>
-      <div class="intro-msg">
-        Rosyln Mediacal Centre began in ____ by ______ to help serve the
-        community they [grew up in/love]. x years later [dynamically update
-        num of years using (date.year - original date)] our brilliant team
-        of 5 continue to uphold quality and care in the service of the local
-        communities.
+        </div>
       </div>
-      <div class="empty"></div>
-      <div class="doctor brent">
+    </div>
+
+    <div id="painting">
+      <div data-aos="flip-up" class="textbox">
+        <p>Phone: <a href="tel:03 477 6471">03 477 6471</a></p>
+        <p>Address: <a href="#">271 Highgate</a></p>
+        <p><a href="mailto:ex@ample.com">Email</a></p>
+      </div>
+      <div data-aos="flip-up" class="textbox emergency">
+        <a href="https://dunedinurgentdoctors.co.nz/">Urgent Doctors</a>
+        <p>open 8am - 10pm</p>
+        <a href="tel:03 477 6471">03 477 6471</a>
+        <p>
+          <a href="https://goo.gl/maps/UZVBe7Z7QgrkFec67"
+            >18 Filleul St, Dunedin</a
+          >
+        </p>
+        <p>In an emergency call 111</p>
+      </div>
+    </div>
+
+    <div class="doc-grid">
+      <div class="intro-msg">
+        <p>
+          Rosyln Mediacal Centre began in ____ by ______ to help serve the
+          community they [grew up in/love]. x years later [dynamically update
+          num of years using (date.year - original date)] our brilliant team of
+          5 continue to uphold quality and care in the service of the local
+          communities.
+        </p>
+      </div>
+      <div
+        data-aos="fade-left"
+        data-aos-easing="ease-in-sine"
+        class="doctor brent"
+      >
+        <img src="img/photos/brent.jpg" alt="Marjolein" />
         <h3>Brent Wishart</h3>
         <p>BSC MbChB FRNZCGP</p>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          culpa neque quo eum et quasi velit voluptatum cum maiores
-          exercitationem.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa
+          neque quo eum et quasi velit voluptatum cum maiores exercitationem.
         </p>
       </div>
-      <div class="doctor marge">
-        <img src="" alt="Marjolein" />
+      <div
+        data-aos="fade-right"
+        data-aos-easing="ease-in-sine"
+        class="doctor marge"
+      >
+        <img src="img/photos/marj.jpg" alt="Marjolein" />
         <h3>Marjolein</h3>
         <p>MbCHb FRNZCGP</p>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          culpa neque quo eum et quasi velit voluptatum cum maiores
-          exercitationem.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa
+          neque quo eum et quasi velit voluptatum cum maiores exercitationem.
         </p>
       </div>
-      <div class="doctor rachel">
-        <img src="" alt="Rachel Wensley" />
+      <div
+        data-aos="fade-left"
+        data-aos-easing="ease-in-sine"
+        class="doctor rachel"
+      >
+        <img src="img/photos/rachel.jpg" alt="Rachel Wensley" />
         <h3>Rachel Wensley</h3>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          culpa neque quo eum et quasi velit voluptatum cum maiores
-          exercitationem.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa
+          neque quo eum et quasi velit voluptatum cum maiores exercitationem.
         </p>
       </div>
-      <div class="doctor graham">
-        <img src="" alt="Graham Whittaker" />
+      <div
+        data-aos="fade-right"
+        data-aos-easing="ease-in-sine"
+        class="doctor graham"
+      >
+        <img src="img/photos/graham.jpg" alt="Graham Whittaker" />
         <h3>Graham Whittaker</h3>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          culpa neque quo eum et quasi velit voluptatum cum maiores
-          exercitationem.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa
+          neque quo eum et quasi velit voluptatum cum maiores exercitationem.
         </p>
       </div>
-      <div class="doctor eliza">
-        <img src="" alt="Elizabeth Harris" />
+      <div
+        data-aos="fade-left"
+        data-aos-easing="ease-in-sine"
+        class="doctor eliza"
+      >
+        <img src="img/photos/elizabeth.jpg" alt="Elizabeth Harris" />
         <h3>Elizabeth Harris</h3>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          culpa neque quo eum et quasi velit voluptatum cum maiores
-          exercitationem.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa
+          neque quo eum et quasi velit voluptatum cum maiores exercitationem.
         </p>
       </div>
     </div>
-  </div>
 
-  <!-- Dunedin Panarama -->
-  <div id="panorama">
-    <div class="fade"></div>
-    <div class="fade2"></div>
-  </div>
+    <!-- Dunedin Panarama -->
+    <div id="panorama"></div>
 
-  <!-- Leaflet Map -->
-  <div id="mapid"></div>
+    <!-- Leaflet Map -->
+    <div id="mapid"></div>
 
-  <!-- Footer -->
-  <footer id="main-footer">
-    <p>Rosyln Health Centre *[add business title + info]</p>
-    <p>
-      Project By
-      <a href="http://github.com/diathelia" target="_blank">Diathelia Design</a>
+    <!-- Footer -->
+    <footer>
+      <div>
+        <p>Phone: <a href="tel:03 477 6471">03 477 6471</a></p>
+        <p>Address: <a href="#">271 Highgate</a></p>
+        <p><a href="mailto:ex@ample.com">Email</a></p>
       </div>
-  </footer>
+      <div>
+        <p>Roslyn Health Medical Centre</p>
+        <p>
+          Project By
+          <a href="http://github.com/diathelia" rel="noreferrer"
+            >Diathelia Design</a
+          >
+        </p>
+      </div>
+    </footer>
 
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-    crossorigin="" />
-  <!-- Make sure this Leaflet JS is AFTER Leaflet's CSS -->
-  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-    crossorigin=""></script>
-  <!-- Dependencies -->
-  <script src="js/Leaflet.Sleep.js"></script>
-  <script src="js/smoothscroll.js"></script>
-  <link rel="stylesheet" href="css/normalize.css" />
-  <!-- My Customisations -->
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="js/leaflet.js"></script>
-  <script src="js/time.js"></script>
-  <script src="js/main.js"></script>
-</body>
+    <!-- Leaflet CSS -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin="" /> -->
+    <!-- Make sure this Leaflet JS is AFTER Leaflet's CSS -->
+    <!-- <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+    crossorigin=""></script> -->
+    <!-- Dependencies -->
+    <!-- <script src="js/Leaflet.Sleep.js"></script> -->
+    <!-- My Customisations -->
+    <!-- <script src="js/leaflet.js"></script> -->
 
+    <script src="js/time.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init(); // { disable: "mobile" }
+    </script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

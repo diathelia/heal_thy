@@ -1,0 +1,124 @@
+New scheme:
+
+ - Use hamburger nav bar with basic info ✔
+ - Move open hours and contact info out of nav ✔
+ - Move contact info to footer with a nav link to it
+   (rethink, do i want contact info to be a banner of info more prominently displayed near the top?)
+ - Make open hours prominently displayed on splash page ✔
+ - Use parallax scroll for all banner images ✔
+ - Use animate on scroll for doctor profiles and other stuff ✔
+ - get lighter colour icons: not thicc or black lines
+ - add generic hover class to change text/bg to the same colour, transition time etc
+ - repurpose smoothscroll links like page-down for nav buttons
+ - should i move the map up to where the contact info is?
+ - add link to https://www.dunedinurgentdoctors.co.nz/ for emergency section ✔
+
+
+There should be a logic to the infomation displayed at the top.
+Nav is not currently accessible to screen readers and the like (got a strange "2 minutes" text output??)
+
+Google:
+Address: 271 Highgate, Roslyn, Dunedin 9010
+Hours: Closed ⋅ Opens 8:30AM Mon
+
+Phone: 03-477 6471
+
+New nav:
+1. HOURS        --> expands to show
+2. CONTACT      --> expands to show phone number, location, email
+3. OUR TEAM     --> cuts to doctors
+
+-NOTES-------------------------------------------------
+
+use flexbox for nav-row, use grid for spacing all other content.
+
+info before doctors: 'what we do' using a 3 column grid style with symbols representing each section.
+
+Marjolein --> Marge Copland
+
+can I poll an API that provides holiday dates? can mondayisation be accounted for?
+
+------------------------------------------------------
+
+https://github.com/michalsnik/aos
+
+to detect the scrollbar width in pixels:
+window.innerWidth - document.documentElement.clientWidth
+Q: is it reliable? --> unneccessary due to changing container width from 100vw to 100%
+
+/*
+  style aims:
+    shrink nav items and rename them "business hours", "my health care" etc
+    change #week-arrow to generalised dropdown arrow (if im gonna use dropdowns)
+    display the open/closed status msg something like status: open where 'open' is a noticable colour, maybe has a border etc
+    why does the page-down arrow shimmer and look odd as the page scrolls? also how can it be pinned so that it is always centered within the fade?
+    is the javascript dor clicking on nav elements something I want? is it best for mobile sizes only? should the nav simply be always on display?
+    change the colors of the nav so they look like buttons regardless, keep the slight hover effect, make the click effect more visual
+    add animations to page so content slides in etc using aos library
+    what color palettes to use? what fonts to use?
+
+    add hover effects as .is-active transitions instead? for mobile only?
+    how to manipulate so all sizes see buttons content by default. hover effects
+    now kick in on clicks. on mobile could each nav element take up 100% page width
+    / be block elements so nav becomes vertical?
+*/
+
+/* .button { */
+/* cursor: pointer; */
+/* flex: 1 1 0;  */
+/* forces flex-items to share same size (ie width due to main-axis) */
+/* background-color: rgba(199, 199, 199, 0); */
+/* color: rgb(6, 0, 83); */
+/* transition: background-color 0.5s ease-in-out; */
+/* transition-property: background-color, color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out; */
+/* font-size: 1.6em; */
+/* transition: 0.3s; (did i mean to write 'all' here?) */
+/* } */
+
+/* .brent {
+  grid-row: 3;
+}
+.marge {
+  grid-row: 4;
+}
+.rachel {
+  grid-row: 5;
+}
+.graham {
+  grid-row: 6;
+}
+.eliza {
+  grid-row: 7;
+} */
+
+/* #week-arrow {
+  transform: rotate(0);
+  transition: transform 0.2s ease-in-out;
+  margin-top: 2%;
+}
+
+#week-arrow.arrow-flip {
+  transform: rotate(180deg);
+} */
+
+/* fade bottom */
+div.fade {
+  position: absolute;
+  top: 90%;
+  width: 100%;
+  height: 10%;
+  min-height: 3rem;
+  background: linear-gradient(to top, white, transparent);
+  z-index: 1;
+}
+
+/* top fade */
+div.fade2 {
+  position: absolute;
+  background: linear-gradient(to bottom, white, transparent);
+  top: 0;
+  width: 100%;
+  height: 10%;
+}

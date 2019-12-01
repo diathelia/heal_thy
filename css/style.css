@@ -1,560 +1,334 @@
-/* general / structure */
-:root {
-  --container-bg-color: rgb(199, 199, 199);
-  --left-bg-color: rgba(86, 202, 248, 0.15);
-  --right-bg-color: rgba(86, 248, 208, 0.15);
-  --hover-width: 75%;
-  --other-width: 25%;
-  --speed: 900ms;
-}
-
-html,
-body {
+/* resets */
+* {
   padding: 0;
   margin: 0;
   border: 0;
-  font-family: "Helvetica Rounded", Arial, sans-serif;
-  font-weight: 300;
-  width: 100%;
-  height: 100%;
-  /* overflow-x: hidden;            /* CAUSES {S/D} SCENIC PARALLAX TO BREAK */
+  box-sizing: border-box;
 }
 
-.container {
+body {
+  font-family: "Helvetica Rounded", Arial, sans-serif;
+  /* font-family: "segoe ui"; */
+  font-weight: 300;
+}
+
+/* splash page container */
+div.splash-container {
   position: relative;
   width: 100%;
-  height: 100%;
-  /* background-color: var(--container-bg-color); */
+  height: 100vh;
 }
 
-.split {
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
+div.splash-grid {
+  display: grid;
+  justify-items: center;
+  /* align-items: center; */
+  /* grid-auto-rows: minmax(100px, auto); */
+  height: calc(100% - 50px);
+  background: url("../img/building.jpg") center center no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  /* -webkit-backdrop-filter: blur(1.5rem); */
+  /* background-blend-mode: difference; */
 }
 
-/* fade-out utilities */
-/* [bottom] */
-.fade {
-  position: absolute;
-  top: 90%;
-  width: 100%;
-  height: 10%;
-  background: linear-gradient(to top, white, transparent);
-  border-bottom: 1em solid #fff;
-}
-
-/* bumped slightly to avoid accidental edge reveal accross browsers [investigate potential sources of error including vh units and %]  */
-#panorama > .fade {
-  height: 11%;
-}
-
-/* [top] */
-.fade2 {
-  position: absolute;
-  background: linear-gradient(to bottom, white, transparent);
-  top: 0;
-  width: 100%;
-  height: 10%;
-  border-top: 1em solid #fff;
-}
-
-/* landing page elements */
-#title,
-#about,
-#contact {
-  position: absolute;
-  transform: translate(-50%);
+h1#title {
+  margin-top: 0.3em;
   white-space: nowrap;
-  margin: 0;
-  padding: 0;
-  border: 0;
+  /* text-align: center; */
   color: #fff;
   background-color: auto;
-  white-space: nowrap;
-}
-
-#title {
-  top: 3%;
-  left: 50%;
-  font-size: 4rem;
-  font-weight: bold;
-  z-index: 1;
   text-shadow: -1.5px -1.5px 0 #060053, 1.5px -1.5px 0 #060053,
     -1.5px 1.5px 0 #060053, 1.5px 1.5px 0 #060053;
+  font-size: 450%;
   /* color: #b7ebff; */
 }
 
-/* #title::before {
-  content: "Roslyn Health";
-  color: #fff;
+div.hours {
+  /* margin: 0 0 2.2em 70vw; */
+  /* margin-bottom: 2.2em; */
   position: absolute;
-  left: 0;
-  height: 55%;
-  overflow: hidden;
-} */
-
-#about,
-#contact {
-  left: 50%;
-  top: 12.5%;
-  font-size: 2.5rem;
-  text-shadow: -1px -1px 0 #060053, 1px -1px 0 #060053, -1px 1px 0 #060053,
-    1px 1px 0 #060053;
+  bottom: 2em;
+  right: 2em;
+  /* align-self: flex-end; */
 }
 
-nav {
-  position: absolute;
-  left: 50%;
-  top: 20%;
-  transform: translate(-50%);
+/* generic textbox overlay */
+div.textbox {
+  text-align: center;
   white-space: nowrap;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.mini-button {
-  display: block;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  height: 1.9rem;
-  width: 16rem;
-  background-color: rgb(199, 199, 199);
-  color: rgb(6, 0, 83);
-  transition: background-color 0.2s ease-in-out;
-  border: 0.3rem solid #fff;
+  font-size: 1.1em;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 1em 2em;
+  border: 0.1rem solid #060053;
   border-radius: 0.3rem;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-align: left;
-  font-size: 1.8rem;
 }
 
-.mini-button img {
-  position: absolute;
-  right: 3.5%;
-  height: 2.3rem;
-  width: 2.3rem;
-  vertical-align: middle;
-  padding: 0;
-  border: 0;
-}
-
-/* dropdowns */
-.dropdown {
-  transition: padding 0.2s ease-in-out;
-}
-
-.droptext {
-  display: block;
-  font-size: 1.1rem;
-  margin: 0.2rem 0 0 0.2rem;
-  padding: 0;
-  border: 0;
-}
-
-/* text fade ins */
-.dropdown .droptext,
-#drophours table {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-/* hours */
-#drophours {
-  transition: padding 0.2s ease-in-out;
-  text-align: justify;
-}
-
-#timetable {
-  font-size: 0.9rem;
-  margin: 0.2rem 0 0 0.2rem;
-  padding: 0;
-  border: 0;
-}
-
-/* [class added by time.js] */
-.see-week {
-  display: inline-block;
-  position: absolute;
-  right: 16%;
-  top: 0.8rem;
-}
-
-/* CONVERT HOVER TO .HOVER: A CLASS FOR MERGING DESKTOP HOVER/TOUCH EFFECTS WITH TOUCHSCREENS */
-
-.mini-button.hover,
-.mini-button:hover {
-  background-color: rgb(214, 214, 214);
-  color: rgb(11, 0, 158);
-}
-
-#drophours.hover,
-#drophours:hover {
-  padding: 0.5rem 0.5rem 7.7rem 0.5rem;
-}
-
-.dropdown.hover,
-.dropdown:hover {
-  padding: 0.5rem 0.5rem 2rem 0.5rem;
-}
-
-.dropdown:hover .droptext,
-.dropdown.hover .droptext,
-#drophours:hover #timetable,
-#drophours.hover #timetable {
-  opacity: 1;
-}
-
-/* replacement hover classes to add/remove with main.js */
-/* .hover-buttons {
-  background-color: rgb(214, 214, 214);
-  color: rgb(11, 0, 158);
-}
-.hover-padding {
-  padding: 0.5rem 0.5rem 2rem 0.5rem;
-}
-.hover-hours {
-  padding: 0.5rem 0.5rem 7.7rem 0.5rem;
-}
-.hover-fade {
-  opacity: 1;
-} */
-
-/* [svg added by time.js] */
-#week-arrow {
-  transition: transform 0.2s ease-in-out;
-}
-
-/* emergency msg */
-#emergency-wrap {
-  position: relative;
-  height: 8rem;
-  width: 100%;
-  margin: 1rem 0 2.3rem 0;
-}
-
-#emergency-big {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  width: 16rem;
-  margin-left: -8rem;
-  background-color: white;
+div.emergency {
   color: red;
+  background-color: white;
   border: 0.1rem solid rgb(255, 0, 0);
-  border-radius: 0.3rem;
-  padding: 0.3rem;
-  font-weight: 300;
-  /* z-index: 1; */
 }
 
-#emergency-big .center {
-  margin-left: 15%;
+span#we-are {
+  font-size: 1.3em;
 }
 
-#emergency-big img {
-  vertical-align: middle;
+span#status {
+  font-weight: bold;
 }
 
-/* arrow to below the fold */
-img.pageDown {
-  position: absolute;
-  bottom: 2%;
-  left: 50%;
-  width: 4rem;
-  margin-left: -2rem;
-  background-color: transparent;
-  z-index: 1;
-  cursor: pointer;
+table#timetable {
+  font-size: 1.1em;
+}
+
+tr.open-text td {
+  color: #060053;
+  font-weight: bold;
 }
 
 /* below the fold content */
-.grid-wrap {
+div#painting {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  /* grid-auto-rows: min-content; */
+  justify-items: center;
+  align-items: center;
+  background: url("../img/painting2.jpg") center center no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
   width: 100%;
 }
 
-.big-grid {
-  padding: 1em;
+div.doc-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(1fr);
   grid-auto-rows: minmax(100px, auto);
   grid-auto-columns: minmax(200px, auto);
   grid-gap: 1em;
+  padding: 1em;
   justify-items: stretch; /* inner horizontal alignment */
   align-items: stretch; /* inner vertical alignment */
   background-color: #fff;
   color: rgb(6, 0, 83);
+  overflow-x: hidden;
 }
 
-.big-grid > div {
+div.doc-grid > div {
   padding: 1em;
 }
 
-.symbol {
-  grid-row: 1;
-}
-
-.intro-msg {
-  grid-column: 2/5;
-  grid-row: 2;
-}
-
 /* Doctors Profiles */
-.doctor {
-  grid-column: 1/-1;
+div.doctor {
   background: linear-gradient(to right, #56c9f8, transparent);
 }
-.doctor:nth-child(odd) {
+
+div.doctor:nth-child(odd) {
   background: linear-gradient(to left, #56f8d0, transparent);
-  justify-items: end;
+  /* justify-content: end; */
+  text-align: right;
 }
 
-.brent {
-  grid-row: 3;
-}
-.marge {
-  grid-row: 4;
-}
-.rachel {
-  grid-row: 5;
-}
-.graham {
-  grid-row: 6;
-}
-.eliza {
-  grid-row: 7;
+div.doctor > img {
+  height: 20em;
+  width: auto;
 }
 
 /* dunedin panorama */
-#panorama {
-  position: relative;
-  height: 49vh; /* margin-bottom: 2rem; */
-  margin: 0 0 2rem 0;
+div#panorama {
+  height: 50vh;
+  min-height: 20em;
+  margin-bottom: 2em;
   background: url("../img/dunedin2.jpg") center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  opacity: 0.88;
 }
-/* footer */
+
+/* Leaflet always needs a map height */
+div#mapid {
+  display: inline-block;
+  height: 40vh;
+  min-height: 20em;
+  width: 100%;
+}
+
 footer {
+  display: flex;
+  flex-wrap: wrap;
   padding: 0.5em 2em;
   background: #000;
   color: #fff;
   text-align: center;
 }
-footer p {
-  margin: 0;
-  padding: 0;
+
+footer > div {
+  flex: 1 1 0;
+}
+
+footer > p {
+  padding: 1em 0;
+  white-space: nowrap;
+}
+
+footer img {
+  vertical-align: middle;
 }
 
 footer a {
-  color: #56c9f8;
-  /* #2690d4; */
+  color: #56c9f8; /* #2690d4; */
   text-decoration: none;
 }
-/* Leaflet [always needs a map height] */
-#mapid {
+
+/* hamburger nav from https://codepen.io/jo_Geek/pen/xgbaEr */
+.nav {
+  height: 50px;
+  width: 100%;
+  background-color: #060053;
+  position: relative;
+}
+
+.nav > .nav-header {
+  display: inline;
+}
+
+.nav > .nav-header > .nav-title {
   display: inline-block;
-  height: 40vh;
-  width: 100%;
+  font-size: 1.5em;
+  color: #fff;
+  padding: 10px 10px 10px 10px;
 }
 
-/* SPLIT SCREEN TRANSFORMS */
-/* landing page images */
-#left-img {
-  background: url("../img/dunedin.jpg") center center no-repeat;
-  background-size: cover;
-}
-#right-img {
-  background: url("../img/molecules.jpg") center center no-repeat;
-  background-size: cover;
-}
-/* general split-screen hover transforms */
-.split.left {
-  left: 0;
-}
-.split.left:before {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  /* background: var(--left-bg-color); */
-}
-.split.right {
-  right: 0;
-}
-.split.right:before {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  /* background: var(--right-bg-color); */
-}
-.split.left,
-.split.right,
-.split.left:before,
-.split.right:before {
-  transition: var(--speed) all ease-in-out;
+.nav > .nav-btn {
+  display: none;
 }
 
-.hover-left .left {
-  width: var(--hover-width);
+.nav > .nav-links {
+  display: inline;
+  float: right;
+  font-size: 1.1em;
 }
-.hover-left .right {
-  width: var(--other-width);
+
+.nav > .nav-links > a {
+  display: inline-block;
+  padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: #efefef;
 }
-.hover-left .right:before {
-  z-index: 1;
+
+.nav > .nav-links > a:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  text-decoration: underline;
 }
-.hover-right .right {
-  width: var(--hover-width);
+
+.nav > #nav-check {
+  display: none;
 }
-.hover-right .left {
-  width: var(--other-width);
-}
-.hover-right .left:before {
-  z-index: 1;
-}
-/* portrait constraints for Landing Page DRAMA. */
-@media only screen and (max-width: 800px) {
-  .big-grid {
-    grid-template-columns: 1fr 1fr;
+
+/* for-phone-only */
+@media only screen and (max-width: 510px) {
+  /* 300% takes up entire screen width @ 320px width */
+  h1#title {
+    font-size: 300%;
   }
-  .intro-msg {
-    grid-column: 1/-1;
+
+  /* scale down textboxes */
+  div.textbox {
+    font-size: 0.88em;
   }
-  .empty {
-    display: none;
+
+  /* centre hours textbox */
+  div.hours {
+    /* undo absolute positioning */
+    position: relative;
+    bottom: 0;
+    right: 0;
+    /* reset to centre */
+    margin-bottom: 2.2em;
+    align-self: flex-end;
   }
-  .split a {
-    font-size: 1.6rem !important;
+
+  /* ensure doc images fit */
+  div.doctor > img {
+    height: auto;
+    width: 16em;
   }
-  .mini-button {
-    max-height: 1.6rem;
-    max-width: 13rem;
+
+  /* forces footer columns to stack */
+  footer {
+    flex-flow: column wrap;
   }
-  .mini-button img {
-    max-height: 1.6rem;
+
+  /* collapses hamburger nav */
+  .nav > .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
   }
-  #week-arrow {
-    margin-top: 0.2rem;
+  .nav > .nav-btn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
   }
-  :root {
-    --speed: 400ms !important;
+  .nav > .nav-btn > label:hover,
+  .nav #nav-check:checked ~ .nav-btn > label {
+    background-color: rgba(255, 255, 255, 0.3);
   }
-}
-@media only screen and (max-width: 520px) {
-  .big-grid {
-    grid-template-columns: 1fr;
+  .nav > .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
   }
-  :root {
-    --hover-width: 50%;
-    --other-width: 50%;
+  .nav > .nav-links {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: #060053;
+    height: 0px;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 50px;
+    left: 0px;
   }
-  #title {
-    font-size: 3.2rem !important;
+  .nav > .nav-links > a {
+    display: block;
+    width: 100%;
   }
-  .split a {
-    font-size: 1.3rem !important;
+  .nav > #nav-check:not(:checked) ~ .nav-links {
+    height: 0px;
   }
-  .mini-button {
-    max-height: 1.3rem;
-    max-width: 10rem;
-  }
-  .mini-button img {
-    max-height: 1.3rem;
-    right: 5%;
-  }
-  .see-week {
-    right: 20%;
-  }
-  :root {
-    --speed: 300ms !important;
-  }
-}
-@media only screen and (max-width: 420px) {
-  #title {
-    font-size: 2.5rem !important;
-  }
-  h1 {
-    font-size: 2rem !important;
-  }
-  .split a {
-    font-size: 1.1rem !important;
-  }
-  .droptext {
-    font-size: 0.8rem !important;
-  }
-  .mini-button {
-    max-height: 1.1rem;
-    width: 7.5rem !important;
-  }
-  .mini-button img {
-    max-height: 1.1rem;
-    right: 1% !important;
-  }
-  #week-arrow {
-    margin-top: 0.1rem;
-  }
-}
-/* HORRIBLE landscape PHONE constraints */
-@media only screen and (max-height: 625px) {
-  #contact,
-  #about,
-  img.pageDown {
-    display: none;
-  }
-  #title {
-    font-size: 2rem !important;
-  }
-  .split a {
-    font-size: 1.1rem !important;
-  }
-  .droptext {
-    font-size: 0.8rem !important;
-  }
-  .mini-button {
-    max-height: 1.1rem;
-    width: 7.5rem !important;
-  }
-  .mini-button img {
-    max-height: 1.1rem;
-    right: 1% !important;
-  }
-  .see-week {
-    right: 20%;
-  }
-}
-@media only screen and (max-height: 400px) {
-  .container {
-    height: 120%;
-  }
-}
-@media only screen and (max-height: 330px) {
-  .container {
-    height: 170%;
+  .nav > #nav-check:checked ~ .nav-links {
+    /* height: calc(100vh - 50px); */
+    height: 400%; /* 100% x number of nav items = correct height */
+    overflow-y: hidden; /* was auto originally */
   }
 }
 
-/* @media only screen and (max-height: 380px) {
-  #title {
-    font-size: 2rem !important;
+/* for-phone-landscape-only */
+@media only screen and (max-height: 500px) {
+  h1#title {
+    font-size: 300%;
+    margin-top: 0.1em;
   }
-  .split a {
-    font-size: 1.1rem !important;
+  /* scale down textboxes */
+  div.textbox {
+    font-size: 0.88em;
   }
-  .droptext {
-    font-size: 0.8rem !important;
+  div.hours {
+    bottom: 0.2em;
+    right: 0.2em;
   }
-  .mini-button {
-    max-height: 1.1rem;
-    width: 7.5rem !important;
-  }
-  .mini-button img {
-    max-height: 1.1rem;
-    right: 1% !important;
-  }
+}
+
+/* for-phone-to-tablet-up */
+/* @media only screen and (min-width: 491px) {
+} */
+
+/* for-tablet-portrait-up */
+/* @media only screen and (min-width: 700px) {
 } */

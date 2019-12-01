@@ -1,7 +1,4 @@
-﻿/**
- * Created by yawno on 25/11/2017.
- */
-window.addEventListener("load", function() {
+﻿window.addEventListener("load", function() {
   // mapbox tiler and general map-click function.
   var mymap = L.map("mapid").setView([-45.87517, 170.48997], 14); // -45.864863, 170.547380 (harbour shot)
 
