@@ -53,6 +53,24 @@ holidays.labour = [10, 28];
 // is mondayised
 holidays.otago = [3, 25];
 
+// get holidays by API
+async function fetchHolidays() {
+  const response = await fetch(
+    "https://holidayapi.com/v1/holidays?country=NZ&year=2018&key=34eab3f8-e49c-4c77-b9bd-17dfe3b24613",
+    {
+      method: "GET",
+      mode: "no-cors"
+    }
+  );
+
+  // https://holidayapi.com/v1/holidays?pretty&country=NZ&year=2019&key=34eab3f8-e49c-4c77-b9bd-17dfe3b24613
+  // https://publicholiday.co.nz/nz-public-holidays-2020.html
+  // https://api.asb.co.nz/public/v1/public-holidays?countryCode=NZ&$fields=date,description
+
+  const json = await response.text();
+  console.log("holidays:", JSON.stringify(json));
+}
+
 // modifies openDay date object, returns true/false
 function isWeekend() {
   if (openDay.getDay() === 0) {

@@ -1,5 +1,5 @@
-const buttons = document.querySelectorAll(".button"),
-  weekArrow = document.querySelector("#week-arrow");
+// const buttons = document.querySelectorAll(".button"),
+//   weekArrow = document.querySelector("#week-arrow");
 
 /*
 document.body.addEventListener("click", e => {
