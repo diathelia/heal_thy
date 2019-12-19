@@ -2,19 +2,22 @@ New scheme:
 
  - Use hamburger nav bar with basic info ✔
  - Move open hours and contact info out of nav ✔
- - Move contact info to footer with a nav link to it
-   (rethink, do i want contact info to be a banner of info more prominently displayed near the top?)
+ - Move contact info to footer with a nav link to it ✔
+   (rethink, do i want contact info to be a banner of info more prominently displayed near the top?) ✔
  - Make open hours prominently displayed on splash page ✔
  - Use parallax scroll for all banner images ✔
  - Use animate on scroll for doctor profiles and other stuff ✔
+ - add link to https://www.dunedinurgentdoctors.co.nz/ for emergency section ✔
  - get lighter colour icons: not thicc or black lines
  - add generic hover class to change text/bg to the same colour, transition time etc
  - repurpose smoothscroll links like page-down for nav buttons
  - should i move the map up to where the contact info is?
- - add link to https://www.dunedinurgentdoctors.co.nz/ for emergency section ✔
+ - use font awesome icons (replace janky cross/plus img i used for a home nav icon)
+ - remove all absolute positioning from grids, get into using subgrids
+ - potentially make the whole page one large grid? (unneccessary?)
+ - mobile nav: blur hover effect after click (atm it lingers until the user clicks somewhere else)
+ - replace
 
-
-There should be a logic to the infomation displayed at the top.
 Nav is not currently accessible to screen readers and the like (got a strange "2 minutes" text output??)
 
 Google:
@@ -32,7 +35,7 @@ New nav:
 
 use flexbox for nav-row, use grid for spacing all other content.
 
-info before doctors: 'what we do' using a 3 column grid style with symbols representing each section.
+info before doctors: 'what we do' using a 3 column grid style with symbols representing each section
 
 Marjolein --> Marge Copland
 
