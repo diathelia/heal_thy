@@ -339,7 +339,7 @@ footer a::after {
   /* ensure doc images fit */
   div.doctor > img {
     height: auto;
-    width: 80%;
+    width: 90%;
   }
 
   /* forces footer columns to stack */
