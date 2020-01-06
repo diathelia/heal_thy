@@ -7,16 +7,8 @@
 }
 
 body {
-  font-family: "Helvetica Rounded", Arial, sans-serif;
-  /* font-family: "segoe ui"; */
+  font-family: 'Helvetica Rounded', Arial, sans-serif;
   font-weight: 300;
-}
-
-/* splash page container */
-div.splash-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
 }
 
 div.splash-grid {
@@ -26,51 +18,94 @@ div.splash-grid {
   /* gap: 1em; */
   padding: 1em;
   justify-items: center;
-  height: calc(100% - 50px);
-  background: url("../img/building.jpg") center center no-repeat;
+  /* width: 100%; */
+  height: calc(100vh - 50px);
+  background: url('../img/building.jpg') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  /* -webkit-backdrop-filter: blur(1.5rem); */
-  /* background-blend-mode: difference; */
 }
 
-/* generic textbox overlay */
-div.textbox {
+div.welcome-text {
   text-align: center;
-  white-space: nowrap;
-  font-size: 1.1em;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 0.5em 1em;
-  border: 0.1rem solid #060053;
-  border-radius: 0.3rem;
+  color: #fff;
+  text-shadow: -1.5px -1.5px 0 #060053, 1.5px -1.5px 0 #060053, -1.5px 1.5px 0 #060053, 1.5px 1.5px 0 #060053;
 }
 
-h1#title {
-  /* margin-top: 0.3em; */
+div.welcome-text > h1#title {
   white-space: nowrap;
+  /* margin-top: 0.3em; */
   /* text-align: center; */
-  color: #fff;
-  background-color: auto;
-  text-shadow: -1.5px -1.5px 0 #060053, 1.5px -1.5px 0 #060053,
-    -1.5px 1.5px 0 #060053, 1.5px 1.5px 0 #060053;
+  /* text-shadow: -1.5px -1.5px 0 #060053, 1.5px -1.5px 0 #060053, -1.5px 1.5px 0 #060053, 1.5px 1.5px 0 #060053; */
   font-size: 450%;
   /* color: #b7ebff; */
 }
 
+div.welcome-text > h2 {
+  margin-top: 1em;
+  font-size: 200%;
+  font-style: italic;
+}
+
+div.welcome-text > h3 {
+  margin-top: 0.3em;
+  font-size: 150%;
+  font-style: italic;
+}
+
+/* todo: the div that the h1 and @hours are in have no styling, they are defaulting to filling up half the grid each - change? remove? */
+
+/* generic textbox */
+div.textbox {
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 1.1em;
+  padding: 0.5em 1em;
+  border: 0.1em solid #060053;
+  border-radius: 0.3em;
+  backdrop-filter: blur(10px);
+  line-height: 120%;
+}
+
+/* evenly space text (doesn't affect #hours because it has no <p> elements) */
+div.textbox > p {
+  margin: 0 auto;
+  width: fit-content; /* does not work for IE/Edge: https://caniuse.com/#search=fit-content */
+}
+
+/* custom link underline animation (apply generally except for leaflet links) */
+/* https://stackoverflow.com/questions/40242378/underline-from-left-to-right-on-hover-in-and-out */
+a,
+div#mapid:not(a) {
+  text-decoration: none;
+  color: #060053;
+}
+
+a::after,
+div#mapid:not(a) {
+  display: block;
+  content: '';
+  border-bottom: solid 1px #060053; /* default color, often overidden */
+  transform: scaleX(0);
+  transform-origin: 0% 50%;
+  transition: transform 300ms ease-in-out;
+}
+
+a:hover::after,
+div#mapid:not(a) {
+  transform: scaleX(1);
+}
+
 div.hours {
   align-self: flex-end;
-  /* margin: 0 0 2.2em 70vw; */
-  /* margin-bottom: 2.2em; */
-  /* position: absolute;
-  bottom: 2em;
-  right: 2em; */
-  /* align-self: flex-end; */
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #000;
 }
 
 div.emergency {
   color: red;
   background-color: white;
-  border: 0.1rem solid rgb(255, 0, 0);
+  border: 0.1em solid rgb(255, 0, 0);
 }
 
 span#we-are {
@@ -90,31 +125,31 @@ tr.open-text td {
   font-weight: bold;
 }
 
-/* below the fold content */
+/* below the fold full page container */
 div#painting {
   display: grid;
   /* grid-auto-flow: column; */
-  /* grid-auto-columns: 1fr;
-  grid-auto-rows: 1fr; */
+  /* grid-auto-columns: 1fr; */
+  /* grid-auto-rows: 1fr; */
   /* grid-auto-rows: min-content; */
   justify-items: center;
   align-items: center;
-  background: url("../img/painting2.jpg") center center no-repeat;
+  background: url('../img/painting2.jpg') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
-  width: 100%;
 }
 
 div.doc-grid {
   display: grid;
+  /* width: 100%; */
   /* grid-template-columns: 1fr; */
   grid-auto-rows: minmax(100px, auto);
   /* grid-auto-columns: minmax(200px, auto); */
   gap: 1em;
   padding: 1em;
-  justify-items: stretch; /* inner horizontal alignment */
-  align-items: stretch; /* inner vertical alignment */
+  /* justify-items: stretch; item horizontal alignment */
+  /* align-items: stretch; item vertical alignment */
   background-color: #fff;
   color: rgb(6, 0, 83);
   overflow-x: hidden;
@@ -124,78 +159,100 @@ div.doc-grid > div {
   padding: 1em;
 }
 
-/* Doctors Profiles */
+div.doc-grid > div#intro-msg {
+  align-self: center;
+  justify-self: center;
+}
+
+/* Doctor profiles */
 div.doctor {
+  border-radius: 0.3em;
+}
+
+div.doctor:nth-child(even) {
   background: linear-gradient(to right, #56c9f8, transparent);
+  /* margin-left: 3em; */
 }
 
 div.doctor:nth-child(odd) {
   background: linear-gradient(to left, #56f8d0, transparent);
-  /* justify-content: end; */
   text-align: right;
+  /* margin-right: 3em; */
 }
 
 div.doctor > img {
+  /* display: inline-block; */
   height: 20em;
   width: auto;
+  border-radius: 0.3em;
 }
+
+/* set doctor text to display alongside image (needs more text-alignment and defined-width tinkering) */
+/* div.doctor div.doc-text {
+  display: inline-block;
+} */
 
 /* dunedin panorama */
 div#panorama {
-  height: 50vh;
-  min-height: 20em;
-  margin-bottom: 2em;
-  background: url("../img/dunedin2.jpg") center center no-repeat;
+  height: 40vh;
+  /* min-height: 20em; */
+  margin-bottom: 1em;
+  /* margin: 1em 2em; */
+  background: url('../img/dunedin2.jpg') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
 
+/* div#map-wrap {
+  padding: 1em 2em 2em 2em;
+} */
+
 /* Leaflet always needs a map height */
 div#mapid {
-  display: inline-block;
   height: 40vh;
-  min-height: 20em;
-  width: 100%;
+  /* margin: 0 1em; */
+  /* width: 100vw; */
+  /* min-height: 20em; */
 }
 
 footer {
+  /* max-height: 20vh; */
   display: flex;
   flex-wrap: wrap;
   padding: 0.5em 2em;
   background: #000;
   color: #fff;
-  text-align: center;
+  /* text-align: center; */
+  line-height: 140%;
 }
 
 footer > div {
   flex: 1 1 0;
 }
 
-footer > p {
-  padding: 1em 0;
-  white-space: nowrap;
-}
-
-footer img {
+/* footer img {
   vertical-align: middle;
+} */
+
+footer p {
+  margin: 0 auto;
+  white-space: nowrap;
+  width: fit-content; /* does not work for IE/Edge: https://caniuse.com/#search=fit-content */
 }
 
 footer a {
   color: #56c9f8; /* #2690d4; */
-  text-decoration: none;
+}
+
+footer a::after {
+  border-bottom: solid 1px #56c9f8;
 }
 
 /* hamburger nav from https://codepen.io/jo_Geek/pen/xgbaEr */
 .nav {
   height: 50px;
-  width: 100%;
   background-color: #060053;
   position: relative;
-}
-
-/* very janky approach to centering nav home icon */
-.nav-title > img {
-  margin: -3.5px 0 0 -7px;
 }
 
 .nav > .nav-header {
@@ -204,9 +261,23 @@ footer a {
 
 .nav > .nav-header > .nav-title {
   display: inline-block;
-  font-size: 1.5em;
-  color: #fff;
-  padding: 10px;
+  /* height: 100%; */
+  width: 50px;
+}
+
+/* .nav > .nav-header > .nav-title:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+} */
+
+.nav > .nav-header > .nav-title > svg {
+  height: 100%;
+  width: 100%;
+  margin-top: -2px;
+}
+
+.nav > .nav-header > .nav-title > svg > path {
+  fill: #fff;
 }
 
 .nav > .nav-btn {
@@ -222,30 +293,42 @@ footer a {
 
 .nav > .nav-links > a {
   display: inline-block;
-  /* padding: 13px 10px 13px 10px; */
+  /* margin: 0 auto; */
   padding: 13px 10px 15px 10px;
   text-decoration: none;
   color: #fff;
 }
 
-.nav > .nav-links > a:hover {
+/* .nav > .nav-links > a:hover {
   background-color: rgba(255, 255, 255, 0.3);
-  text-decoration: underline;
+} */
+
+.nav > .nav-links > a::after {
+  border-bottom: solid 1px #fff;
 }
 
 .nav > #nav-check {
   display: none;
 }
 
-/* for-phone-only */
+/* for-mobile-only */
 @media only screen and (max-width: 510px) {
   div.splash-grid {
     padding-left: 0;
     padding-right: 0;
   }
+
   /* 300% (Firefox) and 290% (Chrome) = spans 320px width */
-  h1#title {
-    font-size: 280%;
+  div.welcome-text > h1#title {
+    /* font-size: 280%; */
+    font-size: 14vw;
+  }
+
+  div.welcome-text > h2 {
+    font-size: 6vw;
+  }
+  div.welcome-text > h3 {
+    font-size: 5vw;
   }
 
   /* scale down textboxes */
@@ -256,7 +339,7 @@ footer a {
   /* ensure doc images fit */
   div.doctor > img {
     height: auto;
-    width: 16em;
+    width: 80%;
   }
 
   /* forces footer columns to stack */
@@ -268,14 +351,14 @@ footer a {
   .nav > .nav-btn {
     display: inline-block;
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 0;
+    top: 0;
   }
   .nav > .nav-btn > label {
     display: inline-block;
-    width: 50px;
-    height: 50px;
-    padding: 13px;
+    /* width: 50px; */
+    /* height: 50px; */
+    padding: 13px 13px 7px 13px; /* custom: is there a better way to center these lines? */
     cursor: pointer;
   }
   .nav > .nav-btn > label:hover,
@@ -287,45 +370,38 @@ footer a {
     width: 25px;
     height: 10px;
     border-top: 2px solid #fff;
+    /* margin-top: 0.5px; */
   }
   .nav > .nav-links {
     position: absolute;
     display: block;
     width: 100%;
     background-color: #060053;
-    height: 0px;
+    height: 0;
     transition: all 0.3s ease-in;
     overflow-y: hidden;
     top: 50px;
-    left: 0px;
+    left: 0;
   }
   .nav > .nav-links > a {
     display: block;
-    width: 100%;
+    width: fit-content; /* does not work for IE/Edge: https://caniuse.com/#search=fit-content */
   }
   .nav > #nav-check:not(:checked) ~ .nav-links {
-    height: 0px;
+    height: 0;
   }
   .nav > #nav-check:checked ~ .nav-links {
     /* height: calc(100vh - 50px); */
-    height: 400%; /* 100% x number of nav items = correct height */
+    height: 300%; /* 100% x number of nav items = correct height (NO LONGER WORKING: CHECK BROWSER COMPATABILITIES */
     overflow-y: hidden; /* was auto originally */
   }
 }
 
-/* for-phone-landscape-only */
+/* for-mobile-landscape-only */
 @media only screen and (max-height: 500px) and (max-width: 900px) {
-  h1#title {
-    font-size: 280%;
-    /* margin-top: 0.1em; */
-  }
   /* scale down textboxes */
   div.textbox {
     font-size: 0.8em;
-  }
-  div.hours {
-    /* bottom: 0.2em;
-    right: 0.2em; */
   }
 }
 
@@ -335,7 +411,15 @@ footer a {
     grid-template-columns: 1fr;
   }
 }
-/* for-phone-to-tablet-up */
+
+@media only screen and (min-width: 570px) {
+  /* grow doc profile margins */
+  div.doctor {
+    margin: 0 3em;
+  }
+}
+
+/* for-mobile-to-tablet-up */
 /* @media only screen and (min-width: 491px) {
 } */
 

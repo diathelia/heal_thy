@@ -1,3 +1,5 @@
+AOS.init({duration: '1000'}); // { disable: "mobile" }
+
 // const buttons = document.querySelectorAll(".button"),
 //   weekArrow = document.querySelector("#week-arrow");
 
@@ -36,14 +38,10 @@ document.body.addEventListener("click", e => {
 });
 */
 
-// DOM variables
-const pageDown = document.querySelector(".page-down");
-
 // normalise where scroll-targets land between Firefox & Chrome with selector aliases
 const alias = {};
 // set default firefox scroll-targets
-// alias.ourTeam = ".brent";
-alias.pageDown = ".doc-grid";
+alias.doctors = '.doc-grid';
 
 // if (window.chrome) {
 //   // overwrite aliases with chrome scroll-targets
@@ -53,16 +51,16 @@ alias.pageDown = ".doc-grid";
 
 // scroll listeners
 
+// doctors button
+document.querySelector('#doctors').addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector(alias.doctors).scrollIntoView({behavior: 'smooth'});
+});
+
 // page-down arrow and goto: emergency hours
 // pageDown.addEventListener("click", e => {
 //   e.preventDefault();
 //   document.querySelector(alias.pageDown).scrollIntoView({ behavior: "smooth" });
-// });
-
-// // our team button
-// document.querySelector(".ourTeam").addEventListener("click", e => {
-//   e.preventDefault();
-//   document.querySelector(alias.ourTeam).scrollIntoView({ behavior: "smooth" });
 // });
 
 // // about us button
