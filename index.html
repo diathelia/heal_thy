@@ -24,10 +24,10 @@
     <!-- <script src="js/Leaflet.Sleep.js"></script> -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="css/style.css" />
   </head>
 
   <body>
+    <!-- <a id="top" display="none"></a> -->
     <div class="nav">
       <input type="checkbox" id="nav-check" />
       <div class="nav-header">
@@ -60,7 +60,7 @@
         <h2>Caring for your community for over 30 years</h2>
         <h3>get in touch today</h3>
       </div>
-      <div data-aos="flip-up" class="textbox hours">
+      <div data-aos="fade-down" class="textbox bg-blur hours">
         <span id="we-are">We are&nbsp;<span id="status"></span></span>
         <br />
         <table id="timetable">
@@ -104,34 +104,29 @@
     </div>
 
     <div id="painting">
-      <div data-aos="flip-up" class="textbox">
-        <p><a href="tel:03 477 6471">Phone: 03 477 6471</a></p>
-        <p><a href="#">Address: 271 Highgate</a></p>
-        <p><a href="mailto:ex@ample.com">Email Us</a></p>
-        <p><a href="https://www.managemyhealth.co.nz">Book Now Online</a></p>
-      </div>
-      <div data-aos="flip-down" class="textbox emergency">
-        <p><a href="https://dunedinurgentdoctors.co.nz/">Dunedin Urgent Doctors</a></p>
-        <p>open 8am - 10pm</p>
-        <p>Phone: <a href="tel:03 477 6471">03 477 6471</a></p>
-        <p>Adress: <a href="https://goo.gl/maps/UZVBe7Z7QgrkFec67">18 Filleul St</a></p>
-        <p>In an emergency: <a href="tel:111">Call 111</a></p>
+      <div data-aos="fade-down" data-aos-duration="2000" data-aos-mirror="true" data-aos-id="stripe" id="stripe" class="display-stripe bg-blur">
+        <div data-aos-duration="2000" data-aos-delay="500" data-aos="flip-up" data-aos-mirror="true" id="info" class="textbox">
+          <div id="info-icon">i</div>
+          <p><a href="tel:03 477 6471">Phone: 03 477 6471</a></p>
+          <p><a href="#">Address: 271 Highgate</a></p>
+          <p><a href="mailto:ex@ample.com">Email Us</a></p>
+          <p><a href="https://www.managemyhealth.co.nz">Book Now Online</a></p>
+        </div>
+        <div data-aos-duration="2000" data-aos-delay="500" data-aos="flip-up" data-aos-mirror="true" id="urgent" class="textbox emergency">
+          <img id="emergency-icon" src="img/icons/icons8-ambulance-80.png" alt="emergency help icon" />
+          <p><a href="https://dunedinurgentdoctors.co.nz/">Dunedin Urgent Doctors</a></p>
+          <p>Hours: 8am - 10pm</p>
+          <p>Phone: <a href="tel:03 477 6471">03 477 6471</a></p>
+          <p>Adress: <a href="https://goo.gl/maps/UZVBe7Z7QgrkFec67">18 Filleul St</a></p>
+          <p>In an emergency Call 111</p>
+          <!-- <a href="tel:111"></a> -->
+        </div>
       </div>
     </div>
 
     <div class="doc-grid">
       <div id="intro-msg">
         <h1 data-aos="fade-left">Meet Our Doctors</h1>
-      </div>
-      <div data-aos="fade-left" data-aos-easing="ease-in-sine" class="doctor brent">
-        <img src="img/photos/brent.jpg" alt="Brent Wishart" />
-        <div class="doc-text">
-          <h3>Brent Wishart</h3>
-          <p>BSC MbChB FRNZCGP</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa neque quo eum et quasi velit voluptatum cum maiores exercitationem.
-          </p>
-        </div>
       </div>
       <div data-aos="fade-right" data-aos-easing="ease-in-sine" class="doctor marge">
         <img src="img/photos/marge.jpg" alt="Marge Copland" />
@@ -141,6 +136,16 @@
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa neque quo eum et quasi velit vol uptatum cum maiores
             exercitationem.
+          </p>
+        </div>
+      </div>
+      <div data-aos="fade-left" data-aos-easing="ease-in-sine" class="doctor brent">
+        <img src="img/photos/brent.jpg" alt="Brent Wishart" />
+        <div class="doc-text">
+          <h3>Brent Wishart</h3>
+          <p>BSC MbChB FRNZCGP</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa neque quo eum et quasi velit voluptatum cum maiores exercitationem.
           </p>
         </div>
       </div>
@@ -177,9 +182,11 @@
     <div id="panorama"></div>
 
     <!-- Leaflet Map -->
-    <div id="map-wrap">
-      <div id="mapid"></div>
-    </div>
+    <!-- <div id="map-wrap"> -->
+    <div id="mapid"></div>
+    <!-- </div> -->
+
+    <img id="to-top" src="img/icons/icons8-chevron-up-96.png" alt="back to top button" />
 
     <!-- Footer -->
     <footer>
@@ -197,6 +204,7 @@
       </div>
     </footer>
     <!-- My Customisations -->
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/leaflet.js"></script>
     <script src="js/time.js"></script>
     <script src="js/main.js"></script>
