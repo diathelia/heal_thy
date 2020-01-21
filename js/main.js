@@ -3,6 +3,10 @@ AOS.init({duration: '1000'}); // { disable: "mobile", easing: 'ease-in-out-back'
 // init counter for aos:in:stripe AOS custom animation listener
 let c = 0;
 
+// if (document.body.clientWidth <= 510) {
+//   document.querySelector('#stripe').style.top = '20%';
+// }
+
 document.addEventListener('aos:in:stripe', ({detail}) => {
   // increment counter
   c++;
@@ -11,6 +15,9 @@ document.addEventListener('aos:in:stripe', ({detail}) => {
     // is even --> reset positioning of element
     detail.style.transform = 'translateY(0)';
     // console.log(c, 'even, aos:out');
+  } else if (document.body.clientWidth <= 510) {
+    // is odd --> animate positioning of element
+    detail.style.transform = 'translateY(2vh)';
   } else {
     // is odd --> animate positioning of element
     detail.style.transform = 'translateY(10vh)';
@@ -20,11 +27,14 @@ document.addEventListener('aos:in:stripe', ({detail}) => {
 
 // touch UI fix: closes an open nav when a click is made anywhere on the nav except the links
 document.body.addEventListener('click', e => {
-  console.log(e.target.className);
   // if nav is open and the target does not contain the click trick class, close the fuckin nav
-  if (document.querySelector('#nav-check').checked === true && !e.target.className.includes('click-trick')) {
-    document.querySelector('#nav-check').checked = false;
-    console.log('click-trick');
+  try {
+    if (document.querySelector('#nav-check').checked === true && !e.target.className.includes('click-trick')) {
+      document.querySelector('#nav-check').checked = false;
+      console.log('click-trick');
+    }
+  } catch {
+    console.log('clicking on svg/path elm while nav is open error: Uncaught TypeError: e.target.className.includes is not a function');
   }
 });
 

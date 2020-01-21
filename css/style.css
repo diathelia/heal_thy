@@ -100,7 +100,7 @@ div#mapid:not(a) {
 }
 
 a::after,
-div#mapid:not(a) {
+div#mapid:not(a::after) {
   display: block;
   content: '';
   border-bottom: solid 1px #060053; /* default color, often overidden */
@@ -110,7 +110,7 @@ div#mapid:not(a) {
 }
 
 a:hover::after,
-div#mapid:not(a) {
+div#mapid:not(a:hover::after) {
   transform: scaleX(1);
 }
 
@@ -244,21 +244,14 @@ div#panorama {
   height: 40vh;
   /* min-height: 20em; */
   margin-bottom: 1em;
-  /* margin: 1em 2em; */
   background: url('../img/dunedin2.jpg') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
 
-/* div#map-wrap {
-  padding: 1em 2em 2em 2em;
-} */
-
 /* Leaflet always needs a map height */
 div#mapid {
   height: 40vh;
-  /* margin: 0 1em; */
-  /* width: 100vw; */
   /* min-height: 20em; */
 }
 
@@ -291,7 +284,6 @@ footer > div {
 footer p {
   margin: 0 auto;
   white-space: nowrap;
-  /* width: fit-content; */
 }
 
 footer a {
@@ -315,7 +307,6 @@ footer a::after {
 
 .nav > .nav-header > .nav-title {
   display: inline-block;
-  /* height: 100%; */
   width: 50px;
 }
 
@@ -398,6 +389,12 @@ footer a::after {
   div.display-stripe {
     grid-template-columns: 1fr;
     width: 50%;
+    top: 20%;
+    padding: 1em 0;
+  }
+
+  img#emergency-icon {
+    margin-top: 5em;
   }
 
   div.display-stripe div:nth-of-type(1) {
