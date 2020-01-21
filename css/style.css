@@ -53,7 +53,6 @@ div.welcome-text {
 div.welcome-text > h1#title {
   white-space: nowrap;
   font-size: 450%;
-  /* color: #b7ebff; */
 }
 
 div.welcome-text > h2 {
@@ -67,8 +66,6 @@ div.welcome-text > h3 {
   font-size: 150%;
   font-style: italic;
 }
-
-/* todo: the div that the h1 and @hours are in have no styling, they are defaulting to filling up half the grid each - change? remove? */
 
 /* generic textbox */
 div.textbox {
@@ -90,7 +87,6 @@ div.textbox > p {
 }
 
 /* custom link underline animation (apply generally except for leaflet links) */
-/* has this not:() behaviour completely broken in firefox? */
 /* fixed: used more specific :not(a) selectors like a::after */
 /* https://stackoverflow.com/questions/40242378/underline-from-left-to-right-on-hover-in-and-out */
 a,
