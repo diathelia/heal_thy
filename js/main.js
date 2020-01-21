@@ -18,6 +18,67 @@ document.addEventListener('aos:in:stripe', ({detail}) => {
   }
 });
 
+// touch UI fix: closes an open nav when a click is made anywhere on the nav except the links
+document.body.addEventListener('click', e => {
+  console.log(e.target.className);
+  // if nav is open and the target does not contain the click trick class, close the fuckin nav
+  if (document.querySelector('#nav-check').checked === true && !e.target.className.includes('click-trick')) {
+    document.querySelector('#nav-check').checked = false;
+    console.log('click-trick');
+  }
+});
+
+// normalise where scroll-targets land between Firefox & Chrome with selector aliases
+const alias = {};
+// set default firefox scroll-targets
+alias.contact = '#stripe';
+alias.doctors = '.doc-grid';
+alias.top = 'body';
+
+if (window.chrome) {
+  // overwrite aliases with chrome scroll-targets
+  alias.contact = '#stripe';
+  alias.doctors = '.doc-grid';
+  alias.top = 'body';
+}
+
+// scroll listeners
+// contact button
+document.querySelector('#contact').addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector(alias.contact).scrollIntoView({behavior: 'smooth'});
+});
+
+// doctors button
+document.querySelector('#doctors').addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector(alias.doctors).scrollIntoView({behavior: 'smooth'});
+});
+
+// back to top button
+document.querySelector('#to-top').addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector(alias.top).scrollIntoView({behavior: 'smooth'});
+});
+
+// let navOpen = true;
+
+// detect if nav input is checked or not
+// document.querySelector('#nav-check').addEventListener('click', e => {
+//   if (!navOpen) {
+//     navOpen = true;
+//   } else {
+//     navOpen = false;
+//   }
+// });
+
+// e.target.id != 'nav-check' &&
+// e.target.id != 'nav-btn' &&
+// e.target.id != 'nav-btn-label' &&
+// e.target.id != 'nav-btn-label-1' &&
+// e.target.id != 'nav-btn-label-2' &&
+// e.target.id != 'nav-btn-label-3'
+
 // not working ... gonna use even/odd triggers of aos:in instead
 // document.addEventListener('aos:out:super-duper', ({detail}) => {
 //   console.log('animated out', detail);
@@ -60,39 +121,6 @@ document.body.addEventListener("click", e => {
   }
 });
 */
-
-// normalise where scroll-targets land between Firefox & Chrome with selector aliases
-const alias = {};
-// set default firefox scroll-targets
-alias.contact = '#stripe';
-alias.doctors = '.doc-grid';
-alias.top = '#contact';
-
-if (window.chrome) {
-  // overwrite aliases with chrome scroll-targets
-  alias.contact = '#stripe';
-  alias.doctors = '.doc-grid';
-  alias.top = '#contact';
-}
-
-// scroll listeners
-// contact button
-document.querySelector('#contact').addEventListener('click', e => {
-  e.preventDefault();
-  document.querySelector(alias.contact).scrollIntoView({behavior: 'smooth'});
-});
-
-// doctors button
-document.querySelector('#doctors').addEventListener('click', e => {
-  e.preventDefault();
-  document.querySelector(alias.doctors).scrollIntoView({behavior: 'smooth'});
-});
-
-// back to top button
-document.querySelector('#to-top').addEventListener('click', e => {
-  e.preventDefault();
-  document.querySelector(alias.top).scrollIntoView({behavior: 'smooth'});
-});
 
 // page-down arrow and goto: emergency hours
 // pageDown.addEventListener("click", e => {

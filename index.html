@@ -27,27 +27,26 @@
   </head>
 
   <body>
-    <!-- <a id="top" display="none"></a> -->
-    <div class="nav">
-      <input type="checkbox" id="nav-check" />
-      <div class="nav-header">
-        <div class="nav-title">
-          <svg alt="Medical plus symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+    <div class="nav click-trick">
+      <input type="checkbox" id="nav-check" class="click-trick" />
+      <div class="nav-header click-trick">
+        <div class="nav-title click-trick">
+          <svg alt="Medical plus symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" class="click-trick">
             <path
               d="M38.5 25H27V14c0-.552-.447-1-1-1s-1 .447-1 1v11H13.5c-.552 0-1 .447-1 1s.447 1 1 1H25v11c0 .552.447 1 1 1s1-.447 1-1V27h11.5c.552 0 1-.447 1-1s-.447-1-1-1z"
             />
           </svg>
         </div>
       </div>
-      <div class="nav-btn">
-        <label for="nav-check">
-          <span></span>
-          <span></span>
-          <span></span>
+      <div class="nav-btn click-trick">
+        <label for="nav-check" class="click-trick">
+          <span class="click-trick"></span>
+          <span class="click-trick"></span>
+          <span class="click-trick"></span>
         </label>
       </div>
 
-      <div class="nav-links">
+      <div class="nav-links click-trick">
         <a id="contact" href="#">Contact</a>
         <a id="doctors" href="#">Doctors</a>
         <a href="https://www.managemyhealth.co.nz">Manage My Health</a>
@@ -104,16 +103,29 @@
     </div>
 
     <div id="painting">
-      <div data-aos="fade-down" data-aos-duration="2000" data-aos-mirror="true" data-aos-id="stripe" id="stripe" class="display-stripe bg-blur">
-        <div data-aos-duration="2000" data-aos-delay="500" data-aos="flip-up" data-aos-mirror="true" id="info" class="textbox">
-          <div id="info-icon">i</div>
+      <div
+        data-aos-anchor-placement="top-bottom"
+        data-aos="fade-down"
+        data-aos-duration="2000"
+        data-aos-mirror="true"
+        data-aos-id="stripe"
+        id="stripe"
+        class="display-stripe bg-blur"
+      >
+        <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true">
+          <img id="info-icon" src="img/icons/icons8-info-128.png" alt="contact information icon" />
+        </div>
+        <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true">
+          <img id="emergency-icon" src="img/icons/icons8-ambulance-80.png" alt="emergency help icon" />
+        </div>
+
+        <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" id="info" class="textbox">
           <p><a href="tel:03 477 6471">Phone: 03 477 6471</a></p>
           <p><a href="#">Address: 271 Highgate</a></p>
           <p><a href="mailto:ex@ample.com">Email Us</a></p>
           <p><a href="https://www.managemyhealth.co.nz">Book Now Online</a></p>
         </div>
-        <div data-aos-duration="2000" data-aos-delay="500" data-aos="flip-up" data-aos-mirror="true" id="urgent" class="textbox emergency">
-          <img id="emergency-icon" src="img/icons/icons8-ambulance-80.png" alt="emergency help icon" />
+        <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" id="urgent" class="textbox emergency">
           <p><a href="https://dunedinurgentdoctors.co.nz/">Dunedin Urgent Doctors</a></p>
           <p>Hours: 8am - 10pm</p>
           <p>Phone: <a href="tel:03 477 6471">03 477 6471</a></p>
