@@ -138,6 +138,7 @@ function threeDays() {
 function applyHTML() {
   // if open is still true, then openDay is still today, therefore check todays hours/mins
   // if todays time is between 8:30am and 5:30pm set status to open
+  // change
   if (open === true) {
     if (hour <= 17 && min <= 30) {
       if (hour >= 8 && min >= 30) {
