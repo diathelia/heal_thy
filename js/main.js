@@ -3,10 +3,6 @@ AOS.init({duration: '1000'}); // { disable: "mobile", easing: 'ease-in-out-back'
 // init counter for aos:in:stripe AOS custom animation listener
 let c = 0;
 
-// if (document.body.clientWidth <= 510) {
-//   document.querySelector('#stripe').style.top = '20%';
-// }
-
 document.addEventListener('aos:in:stripe', ({detail}) => {
   // increment counter
   c++;
