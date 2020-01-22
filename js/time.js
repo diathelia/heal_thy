@@ -53,21 +53,24 @@ holidays.labour = [10, 28];
 // is mondayised
 holidays.otago = [3, 25];
 
+// holidays.test1 = [1, 23];
+// holidays.test2 = [1, 24];
+// holidays.test3 = [1, 27];
+
 // get holidays by API
-async function fetchHolidays() {
-  const response = await fetch('https://holidayapi.com/v1/holidays?country=NZ&year=2018&key=34eab3f8-e49c-4c77-b9bd-17dfe3b24613', {
-    method: 'GET',
-    mode: 'no-cors'
-  });
+// async function fetchHolidays() {
+//   const response = await fetch('https://holidayapi.com/v1/holidays?country=NZ&year=2018&key=34eab3f8-e49c-4c77-b9bd-17dfe3b24613', {
+//     method: 'GET',
+//     mode: 'no-cors'
+//   });
 
-  // https://holidayapi.com/v1/holidays?pretty&country=NZ&year=2019&key=34eab3f8-e49c-4c77-b9bd-17dfe3b24613
-  // https://publicholiday.co.nz/nz-public-holidays-2020.html
-  // https://api.asb.co.nz/public/v1/public-holidays?countryCode=NZ&$fields=date,description
+// https://holidayapi.com/v1/holidays?pretty&country=NZ&year=2019&key=34eab3f8-e49c-4c77-b9bd-17dfe3b24613
+// https://publicholiday.co.nz/nz-public-holidays-2020.html
+// https://api.asb.co.nz/public/v1/public-holidays?countryCode=NZ&$fields=date,description
 
-  const json = await response.text();
-  console.log('holidays:', JSON.stringify(json));
-}
-
+// const json = await response.text();
+// console.log('holidays:', JSON.stringify(json));
+// }
 // modifies openDay date object, returns true/false
 function isWeekend() {
   if (openDay.getDay() === 0) {
@@ -88,19 +91,19 @@ function isWeekend() {
 }
 
 // modifies openDay date object
-function isEvening() {
-  // detect if closed for today but open the following morning
-  if (hour >= 17 && min >= 30) {
-    if (day === 5) {
-      // set to monday
-      openDay.setDate(openDay.getDate() + 3);
-    }
-    // set to following day
-    openDay.setDate(openDay.getDate() + 1);
-    // set to 'closed'
-    open = false;
-  }
-}
+// function isEvening() {
+//   // detect if closed for today but open the following morning
+//   if (hour >= 17 && min >= 30) {
+//     if (day === 5) {
+//       // set to monday
+//       openDay.setDate(openDay.getDate() + 3);
+//     }
+//     // set to following day
+//     openDay.setDate(openDay.getDate() + 1);
+//     // set to 'closed'
+//     open = false;
+//   }
+// }
 
 // modifies openDay date object, returns true/false
 function isHoliday() {
@@ -112,14 +115,22 @@ function isHoliday() {
     if (holidays[key].toString() === test.toString()) {
       // proposed day + 1 is safe
       openDay.setDate(openDay.getDate() + 1);
+      // check if bumped day into the weekend
+      isWeekend(); // shifts to monday if needed
+      console.log('holiday found', key);
+
       return true;
     }
   }
   return false;
 }
 
-// tests if today, tomorrow, and day after are holidays
+// tests if today, tomorrow, and day after are holidays or the weekend
+// each isHoliday() match immediately runs ifWeekend() too
 function threeDays() {
+  // check for and correct weekend day
+  isWeekend();
+
   // test proposed date object for holiday
   if (isHoliday() === true) {
     console.log('openDay is a holiday, testing day after');
@@ -135,59 +146,43 @@ function threeDays() {
   }
 }
 
-// string values: pre, in, post = (too early, on time, too late)
-let status = true;
+function isToday() {
+  // string values: pre, in, post = (too early, on time, too late)
+  let status = true;
 
-function applyHTML() {
-  // if open is still true, then openDay is still today, therefore check todays hours/mins
-  if (open === true) {
-    // cant have logic that checks for if min is > or < than 30
-    // contradicts itself and rules out 9:01am counting as valid
+  if (hour >= 8) {
+    // its 8am+ probably open
+    // check 8am and 5pm edgecases
 
-    if (hour >= 8) {
-      // its 8am+ probably open
-      // check 8am and 5pm edgecases
-
-      if (hour === 17 && min >= 30) {
-        // past 5:30, closed
-        status = 'post';
-      }
-
-      if (hour > 17) {
-        // 6pm+, closed
-        status = 'post';
-      }
-
-      if (hour === 8 && min <= 30) {
-        // pre 8:30am, closed
-        status = 'pre';
-      }
-
-      if (status === true) {
-        // within 8:30am - 5:30pm, open
-        status = 'in';
-      }
-    } else {
-      // pre 8am, closed
+    if (hour === 8 && min <= 30) {
+      // pre 8:30am, closed
       status = 'pre';
     }
-  } else {
-    // closed
-    status = 'post';
-  }
 
-  if (status === 'post' || status === 'pre') {
-    document.querySelector('#status').style.color = 'red';
-    statusText = 'closed';
-    openText = 'next open ⟶ ';
-  } else if (status === 'in') {
-    document.querySelector('#status').style.color = '#060053'; // #56c9f8
-    statusText = 'open';
-    openText = 'open ⟶ ';
-  } else {
-    console.log('status error:', status);
-  }
+    if (hour === 17 && min >= 30) {
+      // past 5:30, closed
+      status = 'post';
+      // openDay.setDate(openDay.getDate() + 1);
+    }
 
+    if (hour > 17) {
+      // 6pm+, closed
+      status = 'post';
+      // openDay.setDate(openDay.getDate() + 1);
+    }
+
+    if (status === true) {
+      // within 8:30am - 5:30pm, open
+      status = 'in';
+    }
+  } else {
+    // pre 8am, closed
+    status = 'pre';
+  }
+  return status;
+}
+
+function applyHTML() {
   // add class to openText row
   document.querySelector(ids[openDay.getDay() - 1]).classList.add('open-text');
 
@@ -203,18 +198,72 @@ function applyHTML() {
 // bump test
 // openDay.setDate(openDay.getDate() + 2);
 
-// uses todays date to test, modifies openDay
-isEvening();
+//
+let isClosed = true;
 
-// uses openDay to test, modifies openDay
-threeDays();
-
-// test proposed non-holiday openDay
 if (isWeekend() === true) {
-  console.log('openDay pushed into weekend');
-  // test monday tuesday wednesday for holidays, modifies openDay
+  // today is a weekend day, openDay set to monday
+  // test mon, tues wednes for holidays
+  // (will land on closest non-holiday, accounts for weekends)
   threeDays();
+} else {
+  // is weekday
+  if (isToday() === 'post') {
+    // 5:30pm+, bump open day
+    openDay.setDate(openDay.getDate() + 1);
+
+    // retest bumped open-day
+    // if (isWeekend() === true) {
+    threeDays();
+    // }
+  } else {
+    // today is a workday and not past 5:30pm
+    // test if today is a holiday and bump to one after
+    if (isHoliday() === true) {
+      threeDays();
+    } else {
+      // is a weekday + 'pre' or 'in' + not a holiday
+      if (isToday() === 'in') {
+        document.querySelector('#status').style.color = '#060053'; // #56c9f8
+        statusText = 'open';
+        openText = 'open ⟶ ';
+        // change flag
+        isClosed = false;
+      }
+    }
+  }
+}
+
+if (isClosed === true) {
+  document.querySelector('#status').style.color = 'red';
+  statusText = 'closed';
+  openText = 'next open ⟶ ';
 }
 
 // render the fixed week
 applyHTML();
+
+// if (status === 'in') {
+//   document.querySelector('#status').style.color = '#060053'; // #56c9f8
+//   statusText = 'open';
+//   openText = 'open ⟶ ';
+// } else if (status === 'pre' || status === 'post') {
+//   document.querySelector('#status').style.color = 'red';
+//   statusText = 'closed';
+//   openText = 'next open ⟶ ';
+// } else {
+//   console.log('status error:', status);
+// }
+
+// uses todays date to test, modifies openDay
+// isEvening();
+
+// uses openDay to test, modifies openDay
+// threeDays();
+
+// test proposed non-holiday openDay
+// if (isWeekend() === true) {
+//   console.log('openDay pushed into weekend');
+// test monday tuesday wednesday for holidays, modifies openDay
+// threeDays();
+// }
