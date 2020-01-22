@@ -135,22 +135,57 @@ function threeDays() {
   }
 }
 
+// string values: pre, in, post = (too early, on time, too late)
+let status = true;
+
 function applyHTML() {
   // if open is still true, then openDay is still today, therefore check todays hours/mins
-  // if todays time is between 8:30am and 5:30pm set status to open
-  // change dfgdfgd
   if (open === true) {
-    if (hour <= 17 && min <= 30) {
-      if (hour >= 8 && min >= 30) {
-        document.querySelector('#status').style.color = '#060053'; // #56c9f8
-        statusText = 'open';
-        openText = 'open ⟶ ';
-      } else {
-        document.querySelector('#status').style.color = 'red';
-        statusText = 'closed';
-        openText = 'next open ⟶ ';
+    // cant have logic that checks for if min is > or < than 30
+    // contradicts itself and rules out 9:01am counting as valid
+
+    if (hour >= 8) {
+      // its 8am+ probably open
+      // check 8am and 5pm edgecases
+
+      if (hour === 17 && min >= 30) {
+        // past 5:30, closed
+        status = 'post';
       }
+
+      if (hour > 17) {
+        // 6pm+, closed
+        status = 'post';
+      }
+
+      if (hour === 8 && min <= 30) {
+        // pre 8:30am, closed
+        status = 'pre';
+      }
+
+      if (status === true) {
+        // within 8:30am - 5:30pm, open
+        status = 'in';
+      }
+    } else {
+      // pre 8am, closed
+      status = 'pre';
     }
+  } else {
+    // closed
+    status = 'post';
+  }
+
+  if (status === 'post' || status === 'pre') {
+    document.querySelector('#status').style.color = 'red';
+    statusText = 'closed';
+    openText = 'next open ⟶ ';
+  } else if (status === 'in') {
+    document.querySelector('#status').style.color = '#060053'; // #56c9f8
+    statusText = 'open';
+    openText = 'open ⟶ ';
+  } else {
+    console.log('status error:', status);
   }
 
   // add class to openText row
@@ -164,6 +199,9 @@ function applyHTML() {
 }
 
 /*/ begin ordered execution *********************************/
+
+// bump test
+// openDay.setDate(openDay.getDate() + 2);
 
 // uses todays date to test, modifies openDay
 isEvening();
