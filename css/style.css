@@ -42,7 +42,7 @@ div.splash-grid {
   background: url('../img/building.jpg') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  /* opacity: 0.9; */
+  opacity: 0.8;
 }
 
 div.welcome-text {

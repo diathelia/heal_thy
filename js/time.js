@@ -146,10 +146,10 @@ function threeDays() {
   }
 }
 
-function isToday() {
-  // string values: pre, in, post = (too early, on time, too late)
-  let status = true;
+// string values: pre, in, post = (too early, on time, too late)
+let status = true;
 
+function isToday() {
   if (hour >= 8) {
     // its 8am+ probably open
     // check 8am and 5pm edgecases
