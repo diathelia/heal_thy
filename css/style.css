@@ -7,7 +7,8 @@
 }
 
 body {
-  font-family: 'Helvetica Rounded', Arial, sans-serif;
+  /* font-family: 'Helvetica Rounded', Arial, sans-serif; */
+  font-family: 'Roboto';
   font-weight: 300;
 }
 
@@ -83,7 +84,6 @@ div.textbox {
 /* change <p> to <span> to help a possible work-around to using fit-content */
 div.textbox > p {
   margin: 0 auto;
-  /* width: fit-content; */
 }
 
 /* custom link underline animation (apply generally except for leaflet links) */
@@ -165,16 +165,20 @@ div.display-stripe > div {
   place-self: center;
   border: none;
   line-height: 140%;
-  padding: 0 0 0.5em 0;
+  /* padding: 0 0 0.5em 0; */
 }
 
-div.display-stripe div:nth-of-type(1),
-div.display-stripe div:nth-of-type(2) {
+div.display-stripe > div:nth-of-type(1),
+div.display-stripe > div:nth-of-type(2) {
   margin-top: 1em;
 }
 
-div.display-stripe div:nth-of-type(3) {
+div.display-stripe > div:nth-of-type(3) {
   align-self: flex-start;
+}
+div.display-stripe > div:nth-of-type(4) {
+  /* background-color: green; */
+  margin-bottom: 0.5em;
 }
 
 img#info-icon {
@@ -251,7 +255,7 @@ div.doctor div.doc-text {
 }
 
 /* for 800px and upward */
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 815px) {
   div.doctor > * {
     display: inline-block;
     /* }
@@ -438,18 +442,20 @@ footer a::after {
   /* collapse grid */
   div.display-stripe {
     grid-template-columns: 1fr;
-    width: 50%;
     top: 20%;
     padding: 1em 0;
+    width: fit-content;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
   }
 
   img#emergency-icon {
     margin-top: 5em;
   }
 
-  div.display-stripe div:nth-of-type(1) {
+  /* div.display-stripe div:nth-of-type(1) {
     order: 1;
-  }
+  } */
 
   div.display-stripe div:nth-of-type(2) {
     order: 3;
@@ -461,6 +467,7 @@ footer a::after {
 
   div.display-stripe div:nth-of-type(4) {
     order: 4;
+    margin-bottom: 0;
   }
 
   img#info-icon {
