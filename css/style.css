@@ -212,28 +212,82 @@ div.doctor {
   border-radius: 0.3em;
 }
 
-div.doctor:nth-child(even) {
+div.doctor:nth-child(odd) {
   background: linear-gradient(to right, #56c9f8, transparent);
   /* margin-left: 3em; */
 }
 
-div.doctor:nth-child(odd) {
+div.doctor:nth-child(even) {
   background: linear-gradient(to left, #56f8d0, transparent);
   text-align: right;
-  /* margin-right: 3em; */
+}
+div.doctor:nth-child(even) div.doc-text {
+  padding-left: 20%;
+}
+div.doctor:nth-child(odd) div.doc-text {
+  padding-right: 20%;
+}
+
+/* blueys */
+div.doctor:nth-child(odd) img {
+  padding-right: 0.8em;
+}
+
+/* greenies */
+div.doctor:nth-child(even) img {
+  padding-left: 1em;
 }
 
 div.doctor > img {
-  /* display: inline-block; */
   height: 20em;
   width: auto;
   border-radius: 0.3em;
 }
 
-/* set doctor text to display alongside image (needs more text-alignment and defined-width tinkering) */
-/* div.doctor div.doc-text {
-  display: inline-block;
-} */
+/* set doctor text to display alongside image */
+div.doctor div.doc-text {
+  vertical-align: top;
+  line-height: 140%;
+}
+
+/* for 800px and upward */
+@media only screen and (min-width: 800px) {
+  div.doctor > * {
+    display: inline-block;
+    /* }
+
+  div.doctor > img { */
+    /* display: inline-block; */
+  }
+
+  /* grow doc profile margins */
+  div.doctor {
+    margin: 0 3em;
+  }
+
+  /* blueys */
+  div.doctor:nth-child(odd) div.doc-text {
+    width: 30%;
+    padding-right: 0;
+  }
+
+  /* greenies */
+  div.doctor:nth-child(even) {
+    display: grid;
+    grid-template-columns: 30% min-content;
+    justify-content: flex-end;
+  }
+
+  div.doctor:nth-child(even) :nth-child(1) {
+    order: 2;
+  }
+
+  div.doctor:nth-child(even) div.doc-text {
+    order: 1;
+    padding-left: 0;
+    align-self: flex-end;
+  }
+}
 
 /* dunedin panorama */
 div#panorama {
@@ -422,7 +476,7 @@ footer a::after {
   /* ensure doc images fit */
   div.doctor > img {
     height: auto;
-    width: 90%;
+    width: 100%;
   }
 
   /* forces footer columns to stack */
@@ -492,13 +546,6 @@ footer a::after {
 @media only screen and (max-width: 900px) {
   div.splash-grid {
     grid-template-columns: 1fr;
-  }
-}
-
-@media only screen and (min-width: 570px) {
-  /* grow doc profile margins */
-  div.doctor {
-    margin: 0 3em;
   }
 }
 

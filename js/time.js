@@ -159,13 +159,13 @@ function isToday() {
       status = 'pre';
     }
 
-    if (hour === 17 && min >= 30) {
+    if (hour === 22 && min >= 30) {
       // past 5:30, closed
       status = 'post';
       // openDay.setDate(openDay.getDate() + 1);
     }
 
-    if (hour > 17) {
+    if (hour > 19) {
       // 6pm+, closed
       status = 'post';
       // openDay.setDate(openDay.getDate() + 1);
@@ -196,7 +196,7 @@ function applyHTML() {
 /*/ begin ordered execution *********************************/
 
 // bump test
-// openDay.setDate(openDay.getDate() + 2);
+// openDay.setDate(openDay.getDate() + 1);
 
 //
 let isClosed = true;
