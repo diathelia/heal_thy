@@ -62,7 +62,7 @@
         <h2>Caring for your community for over 30 years</h2>
         <h3>get in touch today</h3>
       </div>
-      <div data-aos="fade-down" class="textbox bg-blur hours">
+      <div data-aos="fade-right" class="textbox bg-blur hours">
         <span id="we-are">We are&nbsp;<span id="status"></span></span>
         <br />
         <table id="timetable">
@@ -107,6 +107,7 @@
 
     <div id="painting">
       <div
+        data-aos-once="true"
         data-aos-anchor-placement="top-bottom"
         data-aos="fade-down"
         data-aos-duration="2000"
@@ -122,13 +123,13 @@
           <img id="emergency-icon" src="img/icons/icons8-ambulance-80.png" alt="emergency help icon" />
         </div>
 
-        <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" id="info" class="textbox">
+        <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" data-aos-anchor="#painting" id="info" class="textbox">
           <p><a href="tel:03 477 6471">Phone: 03 477 6471</a></p>
           <p><a href="#">Address: 271 Highgate</a></p>
           <p><a href="mailto:ex@ample.com">Email Us</a></p>
           <p><a href="https://www.managemyhealth.co.nz">Book Now Online</a></p>
         </div>
-        <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" id="urgent" class="textbox emergency">
+        <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" data-aos-anchor="#painting" id="urgent" class="textbox emergency">
           <p><a href="https://dunedinurgentdoctors.co.nz/">Dunedin Urgent Doctors</a></p>
           <p>Hours: 8am - 10pm</p>
           <p>Phone: <a href="tel:03 477 6471">03 477 6471</a></p>
@@ -137,8 +138,23 @@
           <!-- <a href="tel:111"></a> -->
         </div>
       </div>
-    </div>
 
+      <!-- test netlify form handling and recaptcha -->
+      <!-- <div class="textbox">
+        <form name="message" method="POST" netlify data-netlify-recaptcha="true">
+          <p>
+            <label>Email: <input type="email" name="email"/></label>
+          </p>
+          <p>
+            <label>Message: <textarea name="message"></textarea></label>
+          </p>
+          <div data-netlify-recaptcha="true"></div>
+          <p>
+            <button type="submit">Send</button>
+          </p>
+        </form>
+      </div> -->
+    </div>
     <div class="doc-grid">
       <div id="intro-msg">
         <h1>Meet Our Doctors</h1>
@@ -173,19 +189,19 @@
           </p>
         </div>
       </div>
-      <div data-aos="fade-left" data-aos-easing="ease-in-sine" class="doctor graham">
-        <img src="img/doctors/graham.jpg" alt="Graham Whittaker" />
+      <div data-aos="fade-right" data-aos-easing="ease-in-sine" class="doctor eliza">
+        <img src="img/doctors/elizabeth.jpg" alt="Elizabeth Harris" />
         <div class="doc-text">
-          <h3>Graham Whittaker</h3>
+          <h3>Elizabeth Harris</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa neque quo eum et quasi velit voluptatum cum maiores exercitationem.
           </p>
         </div>
       </div>
-      <div data-aos="fade-right" data-aos-easing="ease-in-sine" class="doctor eliza">
-        <img src="img/doctors/elizabeth.jpg" alt="Elizabeth Harris" />
+      <div data-aos="fade-left" data-aos-easing="ease-in-sine" class="doctor graham">
+        <img src="img/doctors/graham.jpg" alt="Graham Whittaker" />
         <div class="doc-text">
-          <h3>Elizabeth Harris</h3>
+          <h3>Graham Whittaker</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa neque quo eum et quasi velit voluptatum cum maiores exercitationem.
           </p>

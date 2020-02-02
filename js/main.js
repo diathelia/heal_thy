@@ -16,14 +16,14 @@ document.addEventListener('aos:in:stripe', ({detail}) => {
     detail.style.transform = 'translateY(2vh)';
   } else {
     // is odd --> animate positioning of element
-    detail.style.transform = 'translateY(10vh)';
+    detail.style.transform = 'translateY(7vh)';
     // console.log(c, 'odd, aos:in');
   }
 });
 
-// touch UI fix: closes an open nav when a click is made anywhere on the nav except the links
+// touch UI fix: closes an open nav when a click is made anywhere on the page except the nav
 document.body.addEventListener('click', e => {
-  // if nav is open and the target does not contain the click trick class, close the fuckin nav
+  // if nav is open and the target does not contain the click-trick class, close the fuckin nav
   try {
     if (document.querySelector('#nav-check').checked === true && !e.target.className.includes('click-trick')) {
       document.querySelector('#nav-check').checked = false;

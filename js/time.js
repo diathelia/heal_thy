@@ -159,16 +159,18 @@ function isToday() {
       status = 'pre';
     }
 
-    if (hour === 22 && min >= 30) {
+    if (hour === 17 && min >= 30) {
       // past 5:30, closed
       status = 'post';
-      // openDay.setDate(openDay.getDate() + 1);
     }
 
-    if (hour > 19) {
+    if (status === 'pre' || status === 'post') {
+      console.log(status, hour, min);
+    }
+
+    if (hour > 17) {
       // 6pm+, closed
       status = 'post';
-      // openDay.setDate(openDay.getDate() + 1);
     }
 
     if (status === true) {
@@ -198,7 +200,7 @@ function applyHTML() {
 // bump test
 // openDay.setDate(openDay.getDate() + 1);
 
-//
+// is closed for today boolean (not for openDay)
 let isClosed = true;
 
 if (isWeekend() === true) {
@@ -229,6 +231,14 @@ if (isWeekend() === true) {
         openText = 'open ⟶ ';
         // change flag
         isClosed = false;
+      } else if (isToday() === 'pre') {
+        document.querySelector('#status').style.color = 'red'; // #56c9f8
+        statusText = 'closed';
+        openText = 'open ⟶ ';
+        // change flag
+        isClosed = false;
+      } else {
+        console.log('status error:', status, openDay);
       }
     }
   }
