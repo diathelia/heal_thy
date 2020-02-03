@@ -30,7 +30,7 @@ document.body.addEventListener('click', e => {
       console.log('click-trick');
     }
   } catch {
-    console.log('clicking on svg/path elm while nav is open error: Uncaught TypeError: e.target.className.includes is not a function');
+    console.log('clicked on svg/path elm while nav is open error: Uncaught TypeError: e.target.className.includes is not a function');
   }
 });
 
