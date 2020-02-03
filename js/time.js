@@ -38,20 +38,21 @@ let open = true,
 // (these are invariant to year)
 holidays.nyd = [1, 1];
 holidays.nyde = [1, 2];
-// is mondayised
-holidays.waitangi = [6, 3]; // bumped to monday
-// is mondayised
-holidays.anzac = [4, 25];
 holidays.christmas = [12, 25];
 holidays.boxing = [12, 26];
 
-// (these change per year)
-holidays.easterf = [4, 19];
-holidays.easterm = [4, 22];
-holidays.queens = [6, 3];
-holidays.labour = [10, 28];
 // is mondayised
-holidays.otago = [3, 25];
+holidays.otago = [3, 23];
+// is mondayised
+holidays.waitangi = [6, 2]; // bumped to monday
+// is mondayised
+holidays.anzac = [4, 27]; // bumped to monday
+
+// (these change per year)
+holidays.easterf = [4, 10];
+holidays.easterm = [4, 13];
+holidays.queens = [6, 1];
+holidays.labour = [10, 26];
 
 // holidays.test1 = [1, 23];
 // holidays.test2 = [1, 24];
@@ -215,9 +216,7 @@ if (isWeekend() === true) {
     openDay.setDate(openDay.getDate() + 1);
 
     // retest bumped open-day
-    // if (isWeekend() === true) {
     threeDays();
-    // }
   } else {
     // today is a workday and not past 5:30pm
     // test if today is a holiday and bump to one after

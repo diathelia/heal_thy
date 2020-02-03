@@ -37,13 +37,13 @@ document.body.addEventListener('click', e => {
 // normalise where scroll-targets land between Firefox & Chrome with selector aliases
 const alias = {};
 // set default firefox scroll-targets
-alias.contact = '#stripe';
+alias.contact = '#painting';
 alias.doctors = '.doc-grid';
 alias.top = 'body';
 
 if (window.chrome) {
   // overwrite aliases with chrome scroll-targets
-  alias.contact = '#stripe';
+  alias.contact = '#painting';
   alias.doctors = '.doc-grid';
   alias.top = 'body';
 }

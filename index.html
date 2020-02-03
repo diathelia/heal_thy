@@ -106,16 +106,16 @@
     </div>
 
     <div id="painting">
-      <div
+      <!-- 
+        data-aos-mirror="true"
+        data-aos-id="stripe"
+        id="stripe" 
         data-aos-once="true"
         data-aos-anchor-placement="top-bottom"
         data-aos="fade-down"
         data-aos-duration="2000"
-        data-aos-mirror="true"
-        data-aos-id="stripe"
-        id="stripe"
-        class="display-stripe bg-blur"
-      >
+      -->
+      <div data-aos="fade-right" class="display-stripe bg-blur">
         <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" data-aos-anchor="#painting">
           <img id="info-icon" src="img/icons/icons8-info-128.png" alt="contact information icon" />
         </div>
@@ -123,18 +123,22 @@
           <img id="emergency-icon" src="img/icons/icons8-ambulance-80.png" alt="emergency help icon" />
         </div>
 
-        <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" data-aos-anchor="#painting" id="info" class="textbox">
+        <!-- data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" data-aos-anchor="#painting" -->
+        <div id="info" class="textbox">
+          <p><a>Roslyn Health Medical</a></p>
           <p><a href="tel:03 477 6471">Phone: 03 477 6471</a></p>
           <p><a href="#">Address: 271 Highgate</a></p>
           <p><a href="mailto:ex@ample.com">Email Us</a></p>
           <p><a href="https://www.managemyhealth.co.nz">Book Now Online</a></p>
         </div>
-        <div data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" data-aos-anchor="#painting" id="urgent" class="textbox emergency">
+
+        <!-- data-aos-duration="2000" data-aos="flip-up" data-aos-mirror="true" data-aos-anchor="#painting" -->
+        <div id="urgent" class="textbox emergency">
           <p><a href="https://dunedinurgentdoctors.co.nz/">Dunedin Urgent Doctors</a></p>
           <p>Hours: 8am - 10pm</p>
           <p>Phone: <a href="tel:03 477 6471">03 477 6471</a></p>
           <p>Adress: <a href="https://goo.gl/maps/UZVBe7Z7QgrkFec67">18 Filleul St</a></p>
-          <p>In an emergency Call 111</p>
+          <p>In an emergency call 111</p>
           <!-- <a href="tel:111"></a> -->
         </div>
       </div>
@@ -189,7 +193,7 @@
           </p>
         </div>
       </div>
-      <div data-aos="fade-right" data-aos-easing="ease-in-sine" class="doctor eliza">
+      <div data-aos="fade-left" data-aos-easing="ease-in-sine" class="doctor eliza">
         <img src="img/doctors/elizabeth.jpg" alt="Elizabeth Harris" />
         <div class="doc-text">
           <h3>Elizabeth Harris</h3>
@@ -198,7 +202,7 @@
           </p>
         </div>
       </div>
-      <div data-aos="fade-left" data-aos-easing="ease-in-sine" class="doctor graham">
+      <div data-aos="fade-right" data-aos-easing="ease-in-sine" class="doctor graham">
         <img src="img/doctors/graham.jpg" alt="Graham Whittaker" />
         <div class="doc-text">
           <h3>Graham Whittaker</h3>
@@ -227,7 +231,7 @@
         <p><a href="mailto:ex@ample.com">Email Us</a></p>
       </div>
       <div>
-        <p>Roslyn Health Centre</p>
+        <p>Roslyn Health Medical Centre</p>
         <p>
           Website by
           <a href="http://github.com/diathelia" rel="noreferrer">github.com/diathelia</a>
