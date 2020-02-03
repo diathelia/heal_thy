@@ -574,7 +574,6 @@ footer a::after {
     width: 25px;
     height: 10px;
     border-top: 2px solid #fff;
-    /* margin-top: 0.5px; */
   }
   .nav > .nav-links {
     position: absolute;
@@ -676,6 +675,7 @@ footer a::after {
     left: 0;
     border: 0;
     border-top: 1.3em solid #fff;
+    border-radius: 0;
   }
 }
 
