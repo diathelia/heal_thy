@@ -62,7 +62,6 @@ div.splash-grid {
   background: url('../img/building.jpg') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  /* opacity: 0.8; */
 }
 
 div.welcome-text {
@@ -254,8 +253,7 @@ div.doc-grid > div {
 }
 
 div.doc-grid > div#intro-msg {
-  align-self: center;
-  justify-self: center;
+  place-self: center;
 }
 
 /* Doctor profiles */
@@ -299,41 +297,6 @@ div.doctor > img {
 div.doctor div.doc-text {
   vertical-align: top;
   line-height: 140%;
-}
-
-/* for 800px and upward */
-@media only screen and (min-width: 815px) {
-  div.doctor > * {
-    display: inline-block;
-  }
-
-  /* grow doc profile margins */
-  div.doctor {
-    margin: 0 3em;
-  }
-
-  /* blueys */
-  div.doctor:nth-child(odd) div.doc-text {
-    width: 30%;
-    padding-right: 0;
-  }
-
-  /* greenies */
-  div.doctor:nth-child(even) {
-    display: grid;
-    grid-template-columns: 30% min-content;
-    justify-content: flex-end;
-  }
-
-  div.doctor:nth-child(even) :nth-child(1) {
-    order: 2;
-  }
-
-  div.doctor:nth-child(even) div.doc-text {
-    order: 1;
-    padding-left: 0;
-    align-self: flex-end;
-  }
 }
 
 /* dunedin panorama */
@@ -510,6 +473,41 @@ footer a::after {
   /* scale down textboxes */
   div.textbox {
     font-size: 0.8em;
+  }
+}
+
+/* for 815px and upward */
+@media only screen and (min-width: 815px) {
+  div.doctor > * {
+    display: inline-block;
+  }
+
+  /* grow doc profile margins */
+  div.doctor {
+    margin: 0 3em;
+  }
+
+  /* blueys */
+  div.doctor:nth-child(odd) div.doc-text {
+    width: 30%;
+    padding-right: 0;
+  }
+
+  /* greenies */
+  div.doctor:nth-child(even) {
+    display: grid;
+    grid-template-columns: 30% min-content;
+    justify-content: flex-end;
+  }
+
+  div.doctor:nth-child(even) :nth-child(1) {
+    order: 2;
+  }
+
+  div.doctor:nth-child(even) div.doc-text {
+    order: 1;
+    padding-left: 0;
+    align-self: flex-end;
   }
 }
 
