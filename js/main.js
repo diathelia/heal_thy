@@ -1,5 +1,6 @@
 AOS.init({duration: '1000'}); // { disable: "mobile", easing: 'ease-in-out-back' }
 
+/*
 // init counter for aos:in:stripe AOS custom animation listener
 let c = 0;
 
@@ -20,6 +21,7 @@ document.addEventListener('aos:in:stripe', ({detail}) => {
     // console.log(c, 'odd, aos:in');
   }
 });
+*/
 
 // touch UI fix: closes an open nav when a click is made anywhere on the page except the nav
 document.body.addEventListener('click', e => {

@@ -13,7 +13,8 @@ body {
 }
 
 /* fallback for backdrop-filter */
-.bg-blur {
+.bg-blur,
+.bg-blur-2 {
   background-color: #fff;
 }
 
@@ -145,6 +146,11 @@ a:hover::after
 /* correct leaflet links */
 div#mapid a {
   text-decoration: underline;
+}
+
+/* hide underline for zoom in/out buttons */
+div#mapid a[href='#'] {
+  text-decoration: none;
 }
 
 div#mapid a::after {

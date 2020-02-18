@@ -26,13 +26,13 @@ const dateObj = new Date(),
   today = [month + 1, date];
 
 let open = true,
-  holidays = {},
   // used to track which day to highlight as open
   openDay = new Date(),
   // status text ('open' or 'closed')
   statusText,
   // open text ('open' or 'next open')
-  openText;
+  openText,
+  holidays = {};
 
 // populate holidays in format [M(M), D(D)] to match the today variable
 // (these are invariant to year)
