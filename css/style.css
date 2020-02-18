@@ -60,7 +60,7 @@ div.splash-grid {
   padding: 1em;
   justify-items: center;
   height: calc(100vh - 50px);
-  background: url('../img/building.jpg') center center no-repeat;
+  background: url('../img/building.webp') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -184,7 +184,7 @@ tr.open-text td {
 /* below the fold full page container */
 div#painting {
   position: relative;
-  background: url('../img/painting2.jpg') center center no-repeat;
+  background: url('../img/painting2.webp') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
@@ -239,7 +239,9 @@ img#emergency-icon {
 }
 
 div.emergency {
-  color: red;
+  color: rgb(6, 0, 83);
+  border: 1px solid red !important;
+  margin-top: -1px;
 }
 
 div.doc-grid {
@@ -311,7 +313,7 @@ div#panorama {
   height: 80vh;
   /* min-height: 20em; */
   /* margin-bottom: 1em; */
-  background: url('../img/dunedin.jpg') center center no-repeat;
+  background: url('../img/dunedin.webp') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
